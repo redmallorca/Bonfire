@@ -22,8 +22,8 @@ $config['auth.use_extended_profile'] = 0;
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 	THE SOFTWARE.
 */
- 
-$config['site.title'] = "Bonfire";
+
+$config['site.title'] = "";
 $config['site.system_email'] = "";
 $config['site.status'] = 1;		// 0 = offline, 1 = online
 $config['site.list_limit'] = 25;
@@ -213,7 +213,8 @@ $config['template.default_theme'] = 'default/';
 |
 */
 $config['template.message_template'] =<<<EOD
-	<div class="notification {type} fade-me">
+	<div class="notification {type}">
+		<a class="close" href="#">x</a>
 		<div>{message}</div>
 	</div>
 EOD;
