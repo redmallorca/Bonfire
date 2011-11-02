@@ -50,58 +50,51 @@ class Settings extends Admin_Controller {
 	//--------------------------------------------------------------------
 	
 	public function index() 
-	{
-		/*
-		$offset = $this->uri->segment(4);
-	
-		Assets::add_js($this->load->view('settings/users_js', null, true), 'inline');
-		
-		$total_users = $this->user_model->count_all();
-	
-		$this->pager['base_url'] = site_url(SITE_AREA .'/settings/users/index');
-		$this->pager['total_rows'] = $total_users;
-		$this->pager['per_page'] = $this->limit;
-		$this->pager['uri_segment']	= 4;
-		
-		$this->pagination->initialize($this->pager);
-		
-		// Was a filter set?
-		if ($this->input->post('filter_submit') && $this->input->post('filter_by_role_id'))
+	{ 
+		// Do we have any actions? 
+		if ($action = $this->input->post('submit'))
 		{
-			$role_id = $this->input->post('filter_by_role_id');
-			
-			$this->db->where('role_id', $role_id);
-			Template::set('filter', $role_id);
+			$checked = $this->input->post('checked');
+
+			switch(strtolower($action))
+			{
+				case 'ban':
+					$this->ban($checked);
+					break;
+				case 'delete':
+					$this->delete($checked);
+					break;
+			}
 		}
 		
-		if (config_item('auth.use_usernames'))
-		{ 
-			$this->db->order_by('username', 'asc');
-		} else
+		// Filters
+		$filter = $this->input->get('filter');
+		switch($filter)
 		{
-			$this->db->order_by('email', 'asc');
+			case 'banned':
+				$this->user_model->where('users.banned', 1);
+				break;
+			case 'deleted':
+				$this->user_model->where('users.deleted', 1);
+				break;
+			case 'inactive':
+				break;
+			case 'role':
+				break;
+			default:
+				$this->user_model->where('users.deleted', 0);
+				break;
 		}
-	
-		Template::set('users', $this->user_model->limit($this->limit, $offset)->find_all());
-		Template::set('total_users', $total_users);
-		Template::set('deleted_users', $this->user_model->count_all(true));
-		Template::set('roles', $this->role_model->select('role_id, role_name, default')->find_all());
-		
-		Template::set('user_count', $this->user_model->count_all());
-		
-		Template::set('login_attempts', $this->user_model->get_login_attempts($this->limit) );
-	
-		$this->load->helper('ui/ui');
-		*/
 		
 		$this->load->library('ui/dataset');
 		$this->dataset->set_source('user_model', 'find_all');
+		$this->dataset->set_selects('users.id, users.role_id, username, first_name, last_name, email, last_login, banned, users.deleted, role_name');
 		
 		$columns = array(
 			array(
 				'field'		=> 'id',
 				'title'		=> 'ID',
-				'width'		=> '10%'
+				'width'		=> '3em'
 			),
 			array(
 				'field'		=> 'username',
@@ -115,12 +108,20 @@ class Settings extends Admin_Controller {
 			),
 			array(
 				'field'		=> 'last_login',
-				'width'		=> '15%'
+				'width'		=> '10em'
 			)
 		);
 		
 		$this->dataset->columns($columns);
+		
+		$bulk_actions = array('ban', 'delete');
+		
+		$this->dataset->actions($bulk_actions);
+		
 		$this->dataset->initialize();
+		
+		Template::set('current_url', current_url());
+		Template::set('filter', $filter);
 		
 		Template::set('toolbar_title', lang('us_user_management'));
 		Template::render();
@@ -211,39 +212,68 @@ class Settings extends Admin_Controller {
 	
 	//--------------------------------------------------------------------
 	
-	public function delete() 
-	{	
-		$id = $this->uri->segment(5);
+	public function ban($users=false, $ban_message='')
+	{
+		if (!$users)
+		{
+			return;
+		}
+		
+		$this->auth->restrict('Bonfire.Users.Manage');
+		
+		foreach ($users as $user_id)
+		{
+			$data = array(
+				'banned'		=> 1,
+				'ban_message'	=> $ban_message
+			);
+		
+			$this->user_model->update($user_id, $data);
+		}
+	}
 	
-		if (!empty($id))
+	//--------------------------------------------------------------------
+	
+	public function delete($users=null) 
+	{	
+		if (empty($users))
+		{
+			$users = array($this->uri->segment(5));
+		}
+		
+		if (!empty($users))
 		{	
 			$this->auth->restrict('Bonfire.Users.Manage');
 		
-			$user = $this->user_model->find($id);
-			if (isset($user) && has_permission('Permissions.'.$user->role_name.'.Manage') && $user->id != $this->auth->user_id())
+			foreach ($users as $id)
 			{
-				if ($this->user_model->delete($id))
+				$user = $this->user_model->find($id);
+
+				if (isset($user) && has_permission('Permissions.'.$user->role_name.'.Manage') && $user->id != $this->auth->user_id())
 				{
-					$user = $this->user_model->find($id);
-					$log_name = $this->settings_lib->item('auth.use_own_names') ? $this->auth->user_name() : ($this->settings_lib->item('auth.use_usernames') ? $user->username : $user->email);
-					$this->activity_model->log_activity($this->auth->user_id(), lang('us_log_delete') . ': '.$log_name, 'users');
-					Template::set_message('The User was successfully deleted.', 'success');
+					if ($this->user_model->delete($id))
+					{
+						$user = $this->user_model->find($id);
+						$log_name = $this->settings_lib->item('auth.use_own_names') ? $this->auth->user_name() : ($this->settings_lib->item('auth.use_usernames') ? $user->username : $user->email);
+						$this->activity_model->log_activity($this->auth->user_id(), lang('us_log_delete') . ': '.$log_name, 'users');
+						Template::set_message('The User was successfully deleted.', 'success');
+					}
+					else
+					{
+						Template::set_message(lang('us_action_not_deleted'). $this->user_model->error, 'error');
+					}							
 				}
 				else
 				{
-					Template::set_message('We could not delete the user: '. $this->user_model->error, 'success');
-				}							
-			}
-			else
-			{
-				if ($user->id == $this->auth->user_id())
-				{
-					Template::set_message(lang('us_self_delete'), 'error');
+					if ($user->id == $this->auth->user_id())
+					{
+						Template::set_message(lang('us_self_delete'), 'error');
+					}
+					else
+					{
+						Template::set_message(sprintf(lang('us_unauthorized'),$user->role_name), 'error');	
+					}				
 				}
-				else
-				{
-					Template::set_message(sprintf(lang('us_unauthorized'),$user->role_name), 'error');	
-				}				
 			}
 		}
 		else
@@ -252,16 +282,6 @@ class Settings extends Admin_Controller {
 		}
 		
 		redirect(SITE_AREA .'/settings/users');
-	}
-	
-	//--------------------------------------------------------------------
-	
-	public function deleted() 
-	{
-		$this->db->where('users.deleted !=', 0);
-		Template::set('users', $this->user_model->find_all(true));
-	
-		Template::render();
 	}
 	
 	//--------------------------------------------------------------------

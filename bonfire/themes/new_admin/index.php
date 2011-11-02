@@ -1,6 +1,7 @@
 <?php 
 	Assets::add_js(array(
 			'jquery-1.6.4.min.js',
+			'plugins.js'
 		), 
 		'external',
 		true
@@ -80,10 +81,6 @@
 
 	<div id="debug"><!-- Stores the Profiler Results --></div>
 	
-	<script>
-		head.js(<?php echo Assets::external_js(null, true) ?>);
-		head.js(<?php echo Assets::module_js(true) ?>);
-	</script>
-	<?php echo Assets::inline_js(); ?>
+	<?php echo Assets::js(); ?>
 </body>
 </html>

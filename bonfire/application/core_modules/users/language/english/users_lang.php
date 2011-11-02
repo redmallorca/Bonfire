@@ -42,7 +42,9 @@ $lang['us_log_edit_profile']		= 'updated their profile';
 $lang['us_deleted_users']			= 'Deleted Users';
 $lang['us_purge_del_accounts']		= 'Purge Deleted Accounts';
 $lang['us_purge_del_note']			= '<h3>Purge Deleted Accounts</h3><p>Purging deleted accounts is a permanent action. There is no going back, so please make sure.</p>';
-$lang['us_no_deleted']				= 'There are not any deleted users in the database.';
+$lang['us_action_deleted']			= 'The User was successfully deleted.';
+$lang['us_action_not_deleted']		= 'We could not delete the user: ';
+
 
 $lang['us_role']					= 'Role';
 $lang['us_role_lower']				= 'role';

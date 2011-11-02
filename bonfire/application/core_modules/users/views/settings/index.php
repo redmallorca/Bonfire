@@ -2,12 +2,12 @@
 	<span>Username starts with: </span>
 </div>
 
-<ul class="tabs">
-	<li class="active"><a href="#">All Users</a></li>
-	<li><a href="#">Banned</a></li>
-	<li><a href="#">Deleted</a></li>
-	<li><a href="#">Inactive</a></li>
-	<li class="dropdown" data-dropdown="dropdown">
+<ul class="tabs" >
+	<li <?php echo $filter=='' ? 'class="active"' : ''; ?>><a href="<?php echo $current_url; ?>">All Users</a></li>
+	<li <?php echo $filter=='banned' ? 'class="active"' : ''; ?>><a href="<?php echo $current_url .'?filter=banned'; ?>">Banned</a></li>
+	<li <?php echo $filter=='deleted' ? 'class="active"' : ''; ?>><a href="<?php echo $current_url .'?filter=deleted'; ?>">Deleted</a></li>
+	<li <?php echo $filter=='inactive' ? 'class="active"' : ''; ?>><a href="#">Inactive</a></li>
+	<li <?php echo $filter=='role' ? 'class="active"' : ''; ?> class="dropdown" data-dropdown="dropdown">
 		<a href="#" class="drodown-toggle">By Role</a>
 		<ul class="dropdown-menu">
 			<li></li>
@@ -20,10 +20,13 @@
 <?php if (isset($results) && is_array($results) && count($results)) : ?>
 	<?php foreach ($results as $user) : ?>
 	<tr>
+		<td>
+			<input type="checkbox" name="checked[]" value="<?php echo $user->id ?>" />
+		</td>
 		<td><?php echo $user->id ?></td>
 		<td>
-			<a href="">
-				<?php echo $user->username; ?>
+			<a href="<?php echo site_url(SITE_AREA .'/settings/users/edit/'. $user->id); ?>">
+				<?php echo $user->username; ?> <?php if ($user->banned) echo '<span class="label warning">Banned</span>'; ?>
 			</a>
 		</td>
 		<td><?php echo $user->first_name .' '. $user->last_name ?></td>
@@ -45,7 +48,9 @@
 	</tr>
 	<?php endforeach; ?>
 <?php else: ?>
-
+	<tr>
+		<td colspan="6">No users found that match your selection.</td>
+	</tr>
 <?php endif; ?>
 
 <?php echo $this->dataset->table_close(); ?>

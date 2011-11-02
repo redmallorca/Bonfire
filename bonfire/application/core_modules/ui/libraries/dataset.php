@@ -28,6 +28,12 @@ class Dataset {
 	protected	$columns;
 	
 	/*
+		Var: $actions
+		Stores the bulk actions to present to the user.
+	*/
+	protected	$actions;
+	
+	/*
 		Var: $per_page
 		The number of results to show per page. 
 		Defaults to the config item 'site.list_limit'
@@ -187,6 +193,47 @@ class Dataset {
 	//--------------------------------------------------------------------
 	
 	/*
+		Method: actions()
+		
+		Sets the bulk actions that will be presented to the user.
+		
+		Parameters: 
+			$actions	- An array of actions. Each action should have
+						  both a title and a path key/value pair.
+						  
+		Examples:
+			$actions = array(
+				array(
+					'title'	=> 'Delete',
+					'path'	=> SITE_AREA .'settings/users/delete'
+				)
+			);
+	*/
+	public function actions($actions=array())
+	{
+		if (count($actions))
+		{
+			$this->actions = $actions;
+		}
+	}
+	
+	//--------------------------------------------------------------------
+	
+	public function set_selects($selects=null) 
+	{
+		if (empty($selects) || empty($this->data_model))
+		{
+			return;
+		}
+		
+		$this->ci->load->model($this->data_model, 'data_model');
+		
+		$this->ci->data_model->select($selects);
+	}
+	
+	//--------------------------------------------------------------------
+	
+	/*
 		Method: results()
 		
 		Returns the result set that was retrieved from the database.
@@ -218,7 +265,18 @@ class Dataset {
 		
 		$output = '';
 		
+		if (is_array($this->actions))
+		{
+			$output .= '<form action="'. current_url() .'" method="post">';
+		}
+		
 		$output .= "<table class='zebra-striped'><thead><tr>";
+		
+		// If we have any actions, we need to make a series of checkboxes for them! 
+		if (is_array($this->actions))
+		{
+			$output .= '<th style="width: 2em"><input type="checkbox" class="check-all" /></th>';
+		}
 		
 		foreach ($this->columns as $column)
 		{
@@ -241,7 +299,27 @@ class Dataset {
 	{
 		$output = '';
 		
-		$output .= "</tbody></table>";
+		$output .= "</tbody>";
+		
+		if (is_array($this->actions))
+		{
+			$output .= '<tfoot><tr><td colspan="'. (count($this->columns) + 1) .'"> With selected: ';
+			
+			foreach ($this->actions as $action)
+			{
+				$action = ucwords($action);
+				$output .= "<input type='submit' name='submit' class='btn' value='{$action}' />&nbsp;&nbsp;";
+			}
+			
+			$output .= '</td></tr></tfoot>';
+		}
+		
+		$output .= '</table>';
+		
+		if (is_array($this->actions))
+		{
+			$output .= '</form>';
+		}
 		
 		return $output;
 	}
