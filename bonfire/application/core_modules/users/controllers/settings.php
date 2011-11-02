@@ -186,10 +186,7 @@ class Settings extends Admin_Controller {
 			
 				Template::set_message('User successfully updated.', 'success');
 			}
-			else 
-			{
-				Template::set_message('There was a problem updating the user: '. $this->user_model->error);
-			}
+
 		}
 		
 		$user = $this->user_model->find($user_id);
