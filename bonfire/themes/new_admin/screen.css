@@ -2101,6 +2101,10 @@ noscript {
 
 .shallow-well { padding: 7px 10px 5px 10px; }
 
+.well h3 {
+	margin-top: 0;
+	line-height: 1.0;
+}
 
 /*--------------------------------------------------------------------
 	Media Queries

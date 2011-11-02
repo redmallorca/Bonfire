@@ -144,10 +144,25 @@
 		<div class="column size1of4">
 			
 			<?php if (isset($user) && has_permission('Permissions.'.$user->role_name.'.Manage') && $user->id != $this->auth->user_id()) : ?>
-			<div class="box delete rounded">
-				<a class="button" id="delete-me" href="<?php echo site_url(SITE_AREA .'/settings/users/delete/'. $user->id); ?>" onclick="return confirm('<?php echo lang('us_delete_account_confirm'); ?>')"><?php echo lang('us_delete_account'); ?></a>
+			<div class="well">
+			
+				<!-- Deleting -->
+				<?php if ($user->deleted == 0) :?>
+					<?php echo lang('us_delete_account_note'); ?>
+					<a class="btn danger" id="delete-me" href="<?php echo site_url(SITE_AREA .'/settings/users/delete/'. $user->id); ?>" onclick="return confirm('<?php echo lang('us_delete_account_confirm'); ?>')"><?php echo lang('us_delete_account'); ?></a>
+				<?php else: ?>
+					<?php echo lang('us_restore_account_note'); ?>
+					<a class="btn primary" id="restore-me" href="<?php echo site_url(SITE_AREA .'/settings/users/restore/'. $user->id); ?>" onclick="return confirm('<?php echo lang('us_restore_account_confirm'); ?>')" ><?php echo lang('us_restore_account'); ?></a>
+				<?php endif; ?>
 				
-				<?php echo lang('us_delete_account_note'); ?>
+				<!-- Banning -->
+				<?php if ($user->banned == 0) :?>
+					<?php echo lang('us_ban_account_note'); ?>
+					<a class="btn danger" id="delete-me" href="<?php echo site_url(SITE_AREA .'/settings/users/ban/'. $user->id); ?>" onclick="return confirm('<?php echo lang('us_ban_account_confirm'); ?>')"><?php echo lang('us_ban_account'); ?></a>
+				<?php else: ?>
+					<?php echo lang('us_unban_account_note'); ?>
+					<a class="btn primary" id="restore-me" href="<?php echo site_url(SITE_AREA .'/settings/users/unban/'. $user->id); ?>" onclick="return confirm('<?php echo lang('us_unban_account_confirm'); ?>')" ><?php echo lang('us_unban_account'); ?></a>
+				<?php endif; ?>
 			</div>
 			<?php endif; ?>
 			

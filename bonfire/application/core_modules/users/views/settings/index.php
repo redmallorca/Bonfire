@@ -25,9 +25,8 @@
 		</td>
 		<td><?php echo $user->id ?></td>
 		<td>
-			<a href="<?php echo site_url(SITE_AREA .'/settings/users/edit/'. $user->id); ?>">
-				<?php echo $user->username; ?> <?php if ($user->banned) echo '<span class="label warning">Banned</span>'; ?>
-			</a>
+			<a href="<?php echo site_url(SITE_AREA .'/settings/users/edit/'. $user->id); ?>"><?php echo $user->username; ?></a>
+			<?php if ($user->banned) echo '<span class="label warning">Banned</span>'; ?>
 		</td>
 		<td><?php echo $user->first_name .' '. $user->last_name ?></td>
 		<td>
