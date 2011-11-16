@@ -15,9 +15,11 @@ class Settings extends Admin_Controller {
 		$this->load->model('permission_model');
 		$this->lang->load('permissions');
 		$this->load->helper('inflector');
-			
+		
+		Template::set_block('sub_nav', 'settings/_sub_nav');		
 	}
 	
+	//--------------------------------------------------------------------
 	
 	/** 
 	 * function index
@@ -27,15 +29,39 @@ class Settings extends Admin_Controller {
 	function index()
 	{
 		Assets::add_js($this->load->view('settings/js', null, true), 'inline');
-		Template::set('records', $this->permission_model->order_by('name')->find_all());
-		Template::set('permission_header', '');
-		if (!Template::get("toolbar_title"))
-		{
-			Template::set("toolbar_title", lang("permissions_manage"));
-		}
+		
+		Template::set("toolbar_title", lang("permissions_manage"));
+		
+		$this->load->library('ui/dataset');
+		$this->dataset->set_source('permission_model', 'find_all');
+		
+		$columns = array(
+			array(
+				'field'		=> 'id',
+				'title'		=> 'ID',
+				'width'		=> '3em'
+			),
+			array(
+				'field'		=> 'name',
+			),
+			array(
+				'field'		=> 'description',
+			),
+			array(
+				'field'		=> 'active',
+			)
+		);
+		
+		$this->dataset->columns($columns);
+		
+		$this->dataset->actions(array('delete'));
+		
+		$this->dataset->initialize();
+		
 		Template::render();
 	}
 	
+	//--------------------------------------------------------------------
 	
 	public function create() 
 	{
@@ -56,6 +82,8 @@ class Settings extends Admin_Controller {
 		Template::set_view('settings/permission_form');
 		Template::render();
 	}
+	
+	//--------------------------------------------------------------------
 			
 	public function edit() 
 	{
@@ -86,6 +114,7 @@ class Settings extends Admin_Controller {
 		Template::render();		
 	}
 	
+	//--------------------------------------------------------------------
 			
 	public function delete() 
 	{	
@@ -104,7 +133,9 @@ class Settings extends Admin_Controller {
 		
 		redirect(SITE_AREA .'/settings/permissions');
 	}
-		
+	
+	//--------------------------------------------------------------------
+	
 	public function save_permissions($type='insert', $id=0) 
 	{	
 			
@@ -136,4 +167,5 @@ class Settings extends Admin_Controller {
 		return $return;
 	}
 
+	//--------------------------------------------------------------------
 }

@@ -1,4 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 $lang['permissions_manage']				= 'Manage Permissions';
 $lang['permissions_edit_text']			= 'Edit this to suit your needs';
 $lang['permissions_no_records']			= 'There aren\'t any Permission in the system.';
