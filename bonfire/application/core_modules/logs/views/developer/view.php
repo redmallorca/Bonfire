@@ -1,4 +1,4 @@
-<h2><span style="font-weight: normal">Viewing:</span> <?php echo $log_file_pretty; ?></h2>
+<h3><span style="font-weight: normal">Viewing:</span> <?php echo $log_file_pretty; ?></h3>
 
 <?php if (!isset($log_content) || empty($log_content)) : ?>
 <div class="notification attention">
@@ -38,36 +38,10 @@
 	
 		<!-- Purge? -->
 		<div class="box delete rounded">
-			<a class="button" id="delete-me" href="<?php echo site_url(SITE_AREA .'/developer/logs/purge/'.$log_file); ?>" onclick="return confirm('Are you sure you want to delete this log file?')"><?php echo lang('log_delete1_button'); ?></a>
-			
 			<?php echo sprintf(lang('log_delete1_note'),$log_file_pretty); ?>
+			
+			<a class="btn danger" href="<?php echo site_url(SITE_AREA .'/developer/logs/purge/'.$log_file); ?>" onclick="return confirm('Are you sure you want to delete this log file?')"><?php echo lang('log_delete1_button'); ?></a>
 		</div>
 	<?php endif; ?>
 
 <?php endif; ?>
-
-<script>
-	// Filter Hook
-	$('#filter').change(function(){
-		// Are we filtering at all? 
-		var filter = $(this).val();
-	
-		$('#log div').each(function(){
-		
-			switch (filter)
-			{
-				case 'all':
-					$(this).css('display', 'block');
-					break;
-				case 'error':
-					if ($(this).hasClass('error'))
-					{
-						$(this).css('display', 'block');
-					} else
-					{
-						$(this).css('display', 'none');
-					}
-			}
-		});
-	});
-</script>

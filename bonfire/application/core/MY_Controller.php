@@ -201,6 +201,10 @@ class Admin_Controller extends Authenticated_Controller {
 		$this->pager['full_tag_close']	= '</div>';
 		$this->pager['next_link'] 		= 'Next &raquo;';
 		$this->pager['prev_link'] 		= '&laquo; Previous';
+		$this->pager['next_tag_open']	= '<span class="next">';
+		$this->pager['next_tag_close']	= '</span>';
+		$this->pager['prev_tag_open']	= '<span class="previous">';
+		$this->pager['prev_tag_close']	= '</span>';
 		
 		$this->limit = $this->settings_lib->item('site.list_limit');
 

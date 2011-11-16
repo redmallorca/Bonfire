@@ -747,6 +747,10 @@ table .purple {
 table .headerSortUp.purple, table .headerSortDown.purple {
   background-color: #e2d5f0;
 }
+table .column-check {
+	width: 2em;
+	text-align: center;
+}
 
 /*--------------------------------------------------------------------
 	!Patterns
@@ -1263,36 +1267,18 @@ footer a {
 .page-header h1 {
   margin-bottom: 8px;
 }
+/* Buttons */
 .btn.danger,
-.alert-message.danger,
 .btn.danger:hover,
-.alert-message.danger:hover,
 .btn.error,
-.alert-message.error,
 .btn.error:hover,
-.alert-message.error:hover,
 .btn.success,
-.alert-message.success,
 .btn.success:hover,
-.alert-message.success:hover,
 .btn.info,
-.alert-message.info,
-.btn.info:hover,
-.alert-message.info:hover,
-.notification.attention,
-.notification.attention:hover,
-.notification.error,
-.notification.error:hover,
-.notification.success,
-.notification.success:hover,
-.notification.information,
-.notification.information:hover {
+.btn.info:hover {
   color: #ffffff;
 }
-.btn.danger,
-.alert-message.danger,
-.btn.error,
-.alert-message.error {
+.btn.danger, .btn.error {
   background-color: #c43c35;
   background-repeat: repeat-x;
   background-image: -khtml-gradient(linear, left top, left bottom, from(#ee5f5b), to(#c43c35));
@@ -1307,13 +1293,7 @@ footer a {
   border-color: #c43c35 #c43c35 #882a25;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
-.notification.error {
-	background-color: #c43c35;
-	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  border-color: #c43c35 #c43c35 #882a25;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-}
-.btn.success, .alert-message.success,
+.btn.success,
  {
   background-color: #57a957;
   background-repeat: repeat-x;
@@ -1329,12 +1309,7 @@ footer a {
   border-color: #57a957 #57a957 #3d773d;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
-.notification.success {	
-	 background-color: #57a957;
-	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  border-color: #57a957 #57a957 #3d773d;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-}
+
 .btn.info, {
   background-color: #339bb9;
   background-repeat: repeat-x;
@@ -1350,13 +1325,7 @@ footer a {
   border-color: #339bb9 #339bb9 #22697d;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
-.alert-message.info,
-.notification.information {
-	background-color: #339bb9;
-	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  border-color: #339bb9 #339bb9 #22697d;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-}
+
 .btn {
   cursor: pointer;
   display: inline-block;
@@ -1453,122 +1422,90 @@ footer a {
   padding: 7px 9px 7px;
   font-size: 11px;
 }
-:root .alert-message, :root .btn {
-  border-radius: 0 \0;
-}
 button.btn::-moz-focus-inner, input[type=submit].btn::-moz-focus-inner {
   padding: 0;
   border: 0;
 }
-.close {
-  float: right;
-  color: #000000;
-  font-size: 20px;
-  font-weight: bold;
-  line-height: 13.5px;
-  text-shadow: 0 1px 0 #ffffff;
-  filter: alpha(opacity=20);
-  -khtml-opacity: 0.2;
-  -moz-opacity: 0.2;
-  opacity: 0.2;
-}
-.close:hover {
-  color: #000000;
-  text-decoration: none;
-  filter: alpha(opacity=40);
-  -khtml-opacity: 0.4;
-  -moz-opacity: 0.4;
-  opacity: 0.4;
-}
-.alert-message,
-.notification {
-  position: relative;
-  padding: 7px 20px;
-  margin-bottom: 18px;
-  color: #404040;
-  background-color: #eedc94;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  border-color: #eedc94 #eedc94 #e4c652;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-  border-width: 1px;
-  border-style: solid;
-	border-left: none;
-	border-right: none;
-}
-.alert-message .close,
-.notification .close {
-  *margin-top: 3px;
-  /* IE7 spacing */
 
-}
-.alert-message h5,
-.notification h5 {
-  line-height: 18px;
-}
-.alert-message p,
-.notification p {
-  margin-bottom: 0;
-}
-.alert-message div,
-.notification div {
-  margin-top: 5px;
-  margin-bottom: 2px;
-  line-height: 28px;
-}
-.alert-message .btn,
-.notification .btn {
-  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
-  -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
-}
-.alert-message.block-message,
+/* 
+	NOTIFICATIONS 
+*/
 .notification {
-  background-image: none;
-  background-color: #fdf5d9;
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
-  padding: 14px;
-  border-color: #fceec1;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	margin:  20px 0;
+	padding: 5px 20px;
 }
-.alert-message.block-message ul, .alert-message.block-message p,
-.notification ul, .notification p {
-  margin-right: 30px;
+#message {
+	position: absolute;
+	top: 35px;
+	left: 0;
+	width: 100%;
+	font-size: inherit;
+	z-index: 1000;
+	text-align: center;
+	-webkit-border-bottom-left-radius: 7px;
+	-webkit-border-bottom-right-radius: 7px;
+	-moz-border-radius-bottomleft: 7px;
+	-moz-border-radius-bottomright: 7px;
+	border-bottom-left-radius: 7px;
+	border-bottom-right-radius: 7px;
+	overflow: hidden;
 }
-.alert-message.block-message ul,
-.notification ul {
-  margin-bottom: 0;
+#message .notification {
+	display: inline-block;
+	margin: 0 auto;
+	width: auto !important;
+	max-width: 25em;
 }
-.alert-message.block-message li,
-.notification li {
-  color: #404040;
+.notification p, .notification ul {
+	margin: 0 auto;
+	padding: 0;
+	line-height: 1.5;
+	text-indent: none;
+	max-width: none;
 }
-.alert-message.block-message .alert-actions,
-.notification .alert-actions {
-  margin-top: 5px;
+.attention {
+    background: #fffbcc;
+    border-color: #e6db55;
+    color: #666452;
 }
-.alert-message.block-message.error, .alert-message.block-message.success, .alert-message.block-message.info,
-.notification.error, .notification.success, .notification,information {
-  color: #404040;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+.information {
+	background: #dbe3f0;
+	border-color: #a2b4ee;
+	color: #383b46;
 }
-.alert-message.block-message.error,
-.notification.error {
-  background-color: #fddfde;
-  border-color: #fbc7c6;
+.success {
+	background: #d5f0ce;
+	border-color: #9adf8f;
+	color: #556652;
 }
-.alert-message.block-message.success,
-.notification.success {
-  background-color: #d1eed1;
-  border-color: #bfe7bf;
+.error {
+	background-color: #f0cece;
+	border-color:  #df8f8f;
+	color:  #533232;
 }
-.alert-message.block-message.info,
-.notification.information {
-  background-color: #ddf4fb;
-  border-color: #c6edf9;
+p.error {
+	color: #ff3f3f;
+	background-color: transparent;
+	font-size: 75%;
 }
+.notification h1 {
+	margin: 0;
+}
+.notification.small {
+	margin-top: 7px;
+	padding: 0 20px;
+}
+.notification.small p {
+	margin: 0 !important;
+	font-size: 85%;
+	line-height: 2.5;
+}
+
+/*
+	PAGINATION
+*/
 .pagination {
   height: 36px;
   margin: 18px 0;
@@ -1588,26 +1525,23 @@ button.btn::-moz-focus-inner, input[type=submit].btn::-moz-focus-inner {
 .pagination li {
   display: inline;
 }
-.pagination a {
+.pagination a, .pagination strong {
   float: left;
-  padding: 0 14px;
-  line-height: 34px;
-  border-right: 1px solid;
-  border-right-color: #ddd;
-  border-right-color: rgba(0, 0, 0, 0.15);
-  *border-right-color: #ddd;
-  /* IE6-7 */
-
+  padding: 0 0.5em;
+  line-height: 2.0em;
+	border: 1px solid #ddd;
+	margin-right: 3px;
   text-decoration: none;
 }
-.pagination a:hover, .pagination .active a {
-  background-color: #c7eefe;
+.pagination a:hover {
+  text-decoration: underline;
 }
 .pagination .disabled a, .pagination .disabled a:hover {
   background-color: transparent;
   color: #bfbfbf;
 }
-.pagination .next a {
+.pagination .next a, 
+.pagination .previous a {
   border: 0;
 }
 .well {
@@ -1939,7 +1873,7 @@ button.btn::-moz-focus-inner, input[type=submit].btn::-moz-focus-inner {
 .box {
 	border: 1px solid #ccd;
 	padding: 0.5em 1em;
-	margin: 18px;
+	margin: 18px 0;
 }
 .box.delete {
 	border-color: #DCB5B5;
@@ -1949,8 +1883,7 @@ button.btn::-moz-focus-inner, input[type=submit].btn::-moz-focus-inner {
 }
 .box button,
 .box a.btn {
-	float: right; 
-	margin-top: 2.2em;
+	margin: 1em 0;
 }
 .box .cancel {
 	position: absolute;

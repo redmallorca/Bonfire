@@ -37,12 +37,13 @@ class Developer extends Admin_Controller {
 		$this->auth->restrict('Site.Developer.View');
 		$this->auth->restrict('Bonfire.Logs.View');
 		
-		Template::set('toolbar_title', 'System Logs');
+		$this->lang->load('logs');
+		Template::set('toolbar_title', lang('log_title'));
+		
+		Template::set_block('sub_nav', 'developer/_sub_nav');
 		
 		// Logging enabled?
 		Template::set('log_threshold', $this->config->item('log_threshold'));
-		
-		$this->lang->load('logs');
 	}
 	
 	//--------------------------------------------------------------------
@@ -53,14 +54,58 @@ class Developer extends Admin_Controller {
 		Lists all log files and allows you to change the log_threshold.
 	*/
 	public function index() 
-	{
+	{ 
 		$this->load->helper('file');
 		
-		Assets::add_js($this->load->view('developer/logs_js', null, true), 'inline');
+		// Are we doing bulk actions?
+		if ($action = $this->input->post('submit'))
+		{
+			if ($action == lang('bf_action_delete') && has_permission('Bonfire.Logs.Manage'))
+			{
+				$checked = $this->input->post('checked');
+				
+				if (is_array($checked) && count($checked))
+				{
+					foreach ($checked as $file)
+					{
+						@unlink($this->config->item('log_path') . $file);
+						$activity_text = 'log file '.date('F j, Y', strtotime(str_replace('.php', '', str_replace('log-', '', $file))));
+						$this->activity_model->log_activity($this->auth->user_id(), ucfirst($activity_text) . ' deleted from: ' . $this->input->ip_address(), 'logs');
+					}
+					
+					Template::set_message(count($checked) .' '. lang('log_deleted'), 'success');
+				}
+			}
+		}
 		
-		// Log Files
-		Template::set('logs', get_filenames($this->config->item('log_path')));
+		// Load the Log Files
+		$logs = array_reverse(get_filenames($this->config->item('log_path')));
+
+		// Pagination
+		$offset = $this->uri->segment(5) ? $this->uri->segment(5) : 0;
+		//$limit = $this->limit;
+		$limit = 10;
+		
+		$this->pager['base_url'] = site_url(SITE_AREA .'/developer/logs/index');
+		$this->pager['total_rows'] = count($logs);
+		$this->pager['per_page'] = $limit;
+		$this->pager['uri_segment']	= 5;
+		
+		$this->pagination->initialize($this->pager);
+
+		Template::set('logs', array_slice($logs, $offset, $limit));
 	
+		Template::render();
+	}
+	
+	//--------------------------------------------------------------------
+	
+	public function settings() 
+	{
+		$this->auth->restrict('Bonfire.Logs.Manage');
+		
+		Template::set('toolbar_title', lang('log_title_settings'));
+		
 		Template::render();
 	}
 	
@@ -105,10 +150,10 @@ class Developer extends Admin_Controller {
 			$file	- the full name of the file to view (including extension).
 	*/
 	public function view($file='') 
-	{
+	{ 
 		if (empty($file))
 		{
-			$file = $this->uri->segment(5);
+			$file = $this->uri->segment(4);
 		}
 		
 		if (empty($file))
@@ -116,6 +161,8 @@ class Developer extends Admin_Controller {
 			Template::set_message('No log file provided.', 'error');
 			Template::redirect(SITE_AREA .'/developer/logs');
 		}
+		
+		Assets::add_module_js('logs', 'logs');
 				
 		Template::set('log_file', $file);
 		Template::set('log_file_pretty', date('F j, Y', strtotime(str_replace('.php', '', str_replace('log-', '', $file)))));
