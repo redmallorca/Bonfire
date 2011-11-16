@@ -37,12 +37,11 @@ class Settings extends Admin_Controller {
 		$this->lang->load('roles');
 		
 		Assets::add_module_css('roles', 'css/settings.css');
+		Assets::add_module_js('roles', 'jquery.tablehover.pack.js');
 		Assets::add_module_js('roles', 'js/settings.js');
 		
 		// for the render_search_box()
 		$this->load->helper('ui/ui');
-		
-		//Assets::add_js('js/jquery.tablehover.pack.js');
 		
 		Template::set_block('sub_nav', 'settings/sub_nav');
 	}
@@ -350,7 +349,6 @@ class Settings extends Admin_Controller {
 	{
 		// for the permission matrix
 		$this->load->helper('inflector');
-		Assets::add_js($this->load->view('settings/js', null, true), 'inline');
 		
 		Template::set('roles', $this->role_model->find_all());
 		Template::set('matrix_permissions', $this->permission_model->select('permission_id, name')->order_by('name')->find_all());
@@ -362,10 +360,7 @@ class Settings extends Admin_Controller {
 		}
 		Template::set('matrix_role_permissions', $current_permissions);
 		
-		if (!Template::get("toolbar_title"))
-		{
-			Template::set("toolbar_title", lang("role_manage"));
-		}
+		Template::set("toolbar_title", lang('matrix_header'));
 		
 		Template::set_view('settings/permission_matrix');
 		Template::render();
