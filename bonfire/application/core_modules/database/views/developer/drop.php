@@ -20,8 +20,8 @@
 			<?php echo lang('db_drop_attention'); ?>
 		</div>
 		
-		<div style="margin-top: 20px;">
-			<button type="submit" name="submit" class="button"><?php echo lang('bf_action_delete'); ?> <?php echo lang('db_tables'); ?></button> <?php echo lang('bf_or'); ?> 
+		<div class="actions">
+			<button type="submit" name="submit" class="btn danger"><?php echo lang('bf_action_delete'); ?> <?php echo lang('db_tables'); ?></button> <?php echo lang('bf_or'); ?> 
 			<a href="/admin/database"><?php echo lang('bf_action_cancel'); ?></a>
 		</div>
 	

@@ -1,7 +1,7 @@
 <br/>
 <?php if (isset($tables) && is_array($tables) && count($tables) > 0) : ?>
 	<?php echo form_open(SITE_AREA .'/developer/database/', array('style' => 'padding: 0')) ?>
-	<table cellspacing="0">
+	<table class="zebra-striped">
 		<thead>
 			<tr>
 				<th style="width: 2em">
@@ -28,7 +28,7 @@
 						<option><?php echo lang('db_drop'); ?></option>
 					</select> 
 					&nbsp;&nbsp;
-					<input type="submit" namve="submit" value="Apply" />
+					<input type="submit" namve="submit" class="btn" value="Apply" />
 				</td>
 			</tr>
 		</tfoot>
