@@ -44,6 +44,7 @@ class Reports extends Admin_Controller {
 		Assets::add_module_js('activities', 'jquery.dataTables.min.js');
 		Assets::add_module_css('activities', 'datatable.css');	
 		
+		Template::set_block('sub_nav', 'reports/_sub_nav');
 	}
 	
 	//--------------------------------------------------------------------
@@ -58,14 +59,18 @@ class Reports extends Admin_Controller {
 		Assets::add_js($this->load->view('reports/activities_js', null, true), 'inline');
 
 		// get top 5 modules
-		$query = $this->db->select('module, COUNT(module) AS activity_count')->group_by('module')->order_by('activity_count','DESC')->limit(5)->get($this->activity_model->get_table());
-		Template::set('top_modules', $query->result());
+		$this->db->group_by('module');
+		Template::set('top_modules', $this->activity_model->select('module, COUNT(module) AS activity_count')
+														  ->limit(5)
+														  ->order_by('activity_count', 'DESC')
+														  ->find_all()
+													);
 		
 		// get top 5 users and usernames
 		$this->db->join('users', 'activities.user_id = users.id', 'left');
 		$query = $this->db->select('username, user_id, COUNT(user_id) AS activity_count')->group_by('user_id')->order_by('activity_count','DESC')->limit(5)->get($this->activity_model->get_table());
 		Template::set('top_users', $query->result());
-		
+				
 		Template::set('users', $this->user_model->find_all());
 		Template::set('modules', module_list());
 		Template::set('activities', $this->activity_model->find_all());
@@ -79,19 +84,17 @@ class Reports extends Admin_Controller {
 		
 		Shows the activites for the specified user.
 		
-		Parameter: 
+		Parameters: 
 			none
 	*/
 	public function activity_user() 
-	{
+	{ 
 		if (!has_permission('Activities.Own.View') || !has_permission('Activities.User.View')) {
 			Template::set_message(lang('activity_restricted'), 'error');
 			Template::redirect(SITE_AREA .'/reports/activities');
 		}
 		
-		Template::set($this->_get_activity());
-		Template::set_view('view');
-		Template::render();
+		return $this->_get_activity();
 	}
 	
 	//--------------------------------------------------------------------
@@ -215,6 +218,10 @@ class Reports extends Admin_Controller {
 	}
 	
 	
+	//--------------------------------------------------------------------
+	
+	//--------------------------------------------------------------------
+	// !PRIVATE METHODS
 	//--------------------------------------------------------------------
 	
 	/*

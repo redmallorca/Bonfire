@@ -21,6 +21,7 @@
 	THE SOFTWARE.
 */
 
+$lang['activity_home']					= 'Home';
 $lang['activity_title']					= 'Site Activities';
 $lang['activity_own']					= 'Your';
 $lang['activity_user']					= 'User';

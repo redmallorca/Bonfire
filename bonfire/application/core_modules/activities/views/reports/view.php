@@ -11,7 +11,7 @@
 		<?php echo form_open(SITE_AREA . '/reports/activities/' . $vars['which'], 'class="constrained ajax-form"'); ?>
 		<?php echo sprintf(lang('activity_filter_note'),($vars['view_which'] == ucwords(lang('activity_date')) ? 'from before':'only for'),strtolower($vars['view_which'])); ?>
 		<?php echo form_dropdown("activity_select", $select_options, '','id="activity_select"'); ?>
-		<?php echo form_submit('submit', lang('activity_submit')); ?>
+		<?php echo form_submit('submit', lang('activity_submit'), 'class="btn"'); ?>
 		<?php echo form_close(); ?>
 	</div>
 	<?php endif; ?>
