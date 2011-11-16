@@ -9,7 +9,7 @@
 	<table>
 		<thead>
 			<tr>
-				<th><?php echo lang('up_author'); ?></th>
+				<th style="width: 8em"><?php echo lang('up_author'); ?></th>
 				<th style="width: 8em"><?php echo lang('up_committed'); ?></th>
 				<th><?php echo lang('up_message'); ?></th>
 			</tr>
