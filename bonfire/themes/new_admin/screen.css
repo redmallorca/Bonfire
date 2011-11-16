@@ -1918,6 +1918,23 @@ p.error {
 .filter-link-list a {
 	padding: 0 3px;
 }
+/*
+	Matrix
+*/
+.matrix td { text-align: center; }
+td.matrix-title {
+	background: #dbe3f0;
+	border-bottom: 1px solid #aab;
+	border-right: 1px solid #aab;
+	text-align: left;
+}
+.matrix th {
+	padding: 7px 5px;
+	background: #dbe3f0;
+	margin: 0;
+	border-right: 1px solid #aab;
+	border-bottom: 1px solid #aab;
+}
 
 /* !NOSCRIPT */
 noscript {

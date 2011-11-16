@@ -25,8 +25,8 @@ $lang['role_manage']				= 'Manage User Roles';
 $lang['role_no_roles']				= 'There are not any roles in the system.';
 $lang['role_create_button']			= 'Create a new role.';
 $lang['role_create_note']			= 'Every user needs a role. Make sure you have all that you need.';
-$lang['role_distribution']			= 'Account Distribution';
 $lang['role_account_type']			= 'Account Type';
+$lang['role_description']			= 'Description';
 
 $lang['role_name']					= 'Role Name';
 $lang['role_max_desc_length']		= 'Max. 255 characters.';

@@ -1,9 +1,6 @@
-$.subscribe('list-view/list-item/click', function(role_id) {
-	$('#content').load('<?php echo site_url(SITE_AREA .'/settings/roles/edit') ?>/'+ role_id);
-});
+//$('#permission_table').tableHover({colClass: 'hover', ignoreCols: [1]}); 
 
-$('#permission_table').tableHover({colClass: 'hover', ignoreCols: [1]}); 
-	
+/*	
 $('input:checkbox').change(function() {
 	$('#permission_table_result').removeClass();
 	$('#permission_table_result').addClass('notification');
@@ -25,3 +22,64 @@ $('input:checkbox').change(function() {
 				$('#permission_table_result').text(newtext);
 			});
 });
+*/
+// Horizontal Check-all
+	$('.matrix-title a').click(function(){
+		var rows 		= $(this).parents('tr');
+		var checked 	= false;
+		var found		= false;
+		var checkbox	= false;
+		
+		for (i=0; i < rows.length; i++)
+		{
+		
+			checkbox = $(rows[i]).find(":checkbox");
+			
+			if(!found && checkbox.length > 0){
+				found=true;
+				checked = $(checkbox).attr('checked');
+			}
+			if(checked) {
+				checkbox.removeAttr('checked');
+			}
+			else
+			{
+				checkbox.attr('checked','checked');
+			}
+		}
+		
+		return false;
+	});
+	
+	//--------------------------------------------------------------------
+	
+	// Vertical Check All
+	$('.matrix th a').click(function(){
+		var rows 		= $(this).parents('table').find('tbody tr');;
+		var checked 	= false;
+		var found		= false;
+		var checkbox	= false;
+		var columnIndex	= $(this).parent('th').attr('cellIndex');
+				
+		for (i=0; i < rows.length; i++)
+		{
+			checkbox = $(rows[i]).find('td:eq('+(columnIndex)+')').find(":checkbox");
+			
+			if(!found && checkbox.length > 0){
+				found=true;
+				checked = $(checkbox).attr('checked');
+			}
+			if(checked) {
+				checkbox.removeAttr('checked');
+			}
+			else
+			{
+				checkbox.attr('checked','checked');
+			}
+		}
+		
+		return false;
+	});
+	
+	//--------------------------------------------------------------------
+	

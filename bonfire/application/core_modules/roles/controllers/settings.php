@@ -37,11 +37,14 @@ class Settings extends Admin_Controller {
 		$this->lang->load('roles');
 		
 		Assets::add_module_css('roles', 'css/settings.css');
+		Assets::add_module_js('roles', 'js/settings.js');
 		
 		// for the render_search_box()
 		$this->load->helper('ui/ui');
 		
-		Assets::add_js('js/jquery.tablehover.pack.js');
+		//Assets::add_js('js/jquery.tablehover.pack.js');
+		
+		Template::set_block('sub_nav', 'settings/sub_nav');
 	}
 		
 	//--------------------------------------------------------------------
@@ -49,8 +52,6 @@ class Settings extends Admin_Controller {
 	public function index() 
 	{
 		// Get User Counts
-		Assets::add_js($this->load->view('settings/js', null, true), 'inline');
-		
 		Template::set('role_counts', $this->user_model->count_by_roles());
 		Template::set('total_users', $this->user_model->count_all());
 		
