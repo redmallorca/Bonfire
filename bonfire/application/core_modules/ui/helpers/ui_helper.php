@@ -40,3 +40,70 @@ END;
 		echo $form;
 	}
 }
+
+//--------------------------------------------------------------------
+
+/*
+	Function: render filter_first_letter()
+	
+	Displays an alpha list used to filter a list by first letter. 
+	
+	Parameters:
+		$caption	- A string with the text to display before the list.
+*/
+
+function render_filter_first_letter($caption=null)
+{
+	$ci =& get_instance();
+
+	$out = '<span class="filter-link-list">';
+	
+	// All get params
+	$params = $ci->input->get();
+	
+	// Current Filter
+	if (isset($params['firstletter']))
+	{
+		$current = strtolower($params['firstletter']);
+		unset($params['firstletter']);
+	}
+	else {
+		$current = '';
+	}
+	
+	// Build our url
+	if (is_array($params))
+	{
+		$url = current_url() .'?'. array_implode('=', '&', $params);
+	} else 
+	{
+		$url = current_url() .'?';
+	}
+	
+	// If there's a current filter, we need to 
+	// replace the caption with a clear button.
+	if (!empty($current))
+	{
+		$out .= '<a href="'. $url .'" class="btn primary">'. lang('bf_clear') .'</a>';
+	} else
+	{
+		$out .= $caption;
+	}
+
+	// Source
+	$letters = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');
+	
+	// Create our list.
+	foreach ($letters as $letter)
+	{
+		$out .= '<a href="'. $url .'&firstletter='. strtolower($letter) .'">';
+		$out .= $letter;
+		$out .= '</a>';
+	}
+	
+	$out .= '</span>';
+	
+	echo $out;
+}
+
+//--------------------------------------------------------------------

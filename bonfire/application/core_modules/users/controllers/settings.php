@@ -51,6 +51,9 @@ class Settings extends Admin_Controller {
 	
 	public function index() 
 	{ 
+		$roles = $this->role_model->select('role_id, role_name')->where('deleted', 0)->find_all();
+		Template::set('roles', $roles);
+	
 		// Do we have any actions? 
 		if ($action = $this->input->post('submit'))
 		{
@@ -77,14 +80,31 @@ class Settings extends Admin_Controller {
 			case 'deleted':
 				$this->user_model->where('users.deleted', 1);
 				break;
-			case 'inactive':
-				break;
 			case 'role':
+				$role_id = (int)$this->input->get('role_id');
+				$this->user_model->where('users.role_id', $role_id);
+				foreach ($roles as $role)
+				{
+					if ($role->role_id == $role_id)
+					{
+						Template::set('filter_role', $role->role_name);
+						break;
+					}
+				}
 				break;
 			default:
 				$this->user_model->where('users.deleted', 0);
 				break;
 		}
+		
+		// First Letter
+		$first_letter = $this->input->get('firstletter');
+		if (!empty($first_letter))
+		{
+			$this->user_model->where('SUBSTRING( LOWER(username), 1, 1)=', $first_letter);
+		}
+		
+		$this->load->helper('ui/ui');
 		
 		$this->load->library('ui/dataset');
 		$this->dataset->set_source('user_model', 'find_all');

@@ -30,10 +30,6 @@
 	<noscript>
 		<p>Javascript is required to use Bonfire's admin.</p>
 	</noscript>
-	
-	<div id="message">
-		<?php echo Template::message(); ?>
-	</div>
 
 	<div class="topbar" id="topbar" data-dropdown="dropdown">
 		<div class="topbar-inner">
@@ -69,6 +65,8 @@
 	</div>
 
 	<div class="container">
+		<?php echo Template::message(); ?>	
+	
 		<?php echo Template::yield(); ?>
 	</div>
 	

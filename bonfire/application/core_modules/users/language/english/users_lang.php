@@ -99,3 +99,5 @@ $lang['us_action_save']				= 'Save User';
 $lang['us_unauthorized']			= 'Unauthorized. Sorry you do not have the appropriate permission to manage the "%s" role.';
 $lang['us_empty_id']				= 'No userid provided. You must provide a userid to perform this action.';
 $lang['us_self_delete']				= 'Unauthorized. Sorry, you can not delete yourself.';
+
+$lang['us_filter_first_letter']		= 'Username starts with: ';

@@ -1095,6 +1095,10 @@ a.menu:after, .dropdown-toggle:after {
 	line-height: 2.0;
 	padding: 0;
 }
+
+/*
+	Tabs
+*/
 .tabs, .pills {
   margin: 0 0 20px;
   padding: 0;
@@ -1195,6 +1199,10 @@ a.menu:after, .dropdown-toggle:after {
 .tab-content > .active, .pill-content > .active {
   display: block;
 }
+
+/*
+	Breadcrumb
+*/
 .breadcrumb {
   margin: 0 0 18px;
   padding: 7px 14px;
@@ -1227,25 +1235,8 @@ a.menu:after, .dropdown-toggle:after {
 .breadcrumb .active a {
   color: #404040;
 }
-.hero-unit {
-  background-color: #f5f5f5;
-  margin-bottom: 30px;
-  padding: 60px;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-}
-.hero-unit h1 {
-  margin-bottom: 0;
-  font-size: 60px;
-  line-height: 1;
-  letter-spacing: -1px;
-}
-.hero-unit p {
-  font-size: 18px;
-  font-weight: 200;
-  line-height: 27px;
-}
+
+
 footer {
   margin-top: 17px;
   padding-top: 17px;
@@ -1267,7 +1258,9 @@ footer a {
 .page-header h1 {
   margin-bottom: 8px;
 }
-/* Buttons */
+/* 
+	Buttons 
+*/
 .btn.danger,
 .btn.danger:hover,
 .btn.error,
@@ -1544,6 +1537,9 @@ p.error {
 .pagination .previous a {
   border: 0;
 }
+/*
+	Wells
+*/
 .well {
   background-color: #f5f5f5;
   margin-bottom: 20px;
@@ -1562,6 +1558,9 @@ p.error {
   border-color: #ddd;
   border-color: rgba(0, 0, 0, 0.15);
 }
+/*
+	Modals
+*/
 .modal-backdrop {
   background-color: #000000;
   position: fixed;
@@ -1650,6 +1649,9 @@ p.error {
   float: right;
   margin-left: 5px;
 }
+/*
+	Twipsy
+*/
 .twipsy {
   display: block;
   position: absolute;
@@ -1716,6 +1718,9 @@ p.error {
   width: 0;
   height: 0;
 }
+/*
+	Popover
+*/
 .popover {
   position: absolute;
   top: 0;
@@ -1807,6 +1812,9 @@ p.error {
 .fade.in {
   opacity: 1;
 }
+/*
+	Labels
+*/
 .label {
   padding: 1px 3px 2px;
   background-color: #bfbfbf;
@@ -1830,6 +1838,9 @@ p.error {
 .label.notice {
   background-color: #62cffc;
 }
+/*
+	Media Grid
+*/
 .media-grid {
   margin-left: -20px;
   margin-bottom: 0;
@@ -1899,6 +1910,13 @@ p.error {
 }
 .rounded {
 	-webkit-border-radius: 0.5em;
+}
+
+/*
+	Filter-link-list
+*/
+.filter-link-list a {
+	padding: 0 3px;
 }
 
 /* !NOSCRIPT */

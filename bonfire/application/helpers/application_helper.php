@@ -463,3 +463,45 @@ function e($str)
 }
 
 //--------------------------------------------------------------------
+
+/*
+	Function: array_implode()
+	
+	Implode an array with the key and value pair giving a glue, 
+	a separator between pairs and the array to implode.
+	
+	Example: 
+		// Encode Query Strings
+		$query = url_encode( array_implode( '=', '&', $array ) );
+		
+	Parameters:
+		$glue		- The glue between key and value.
+		$separator	- Separator between pairs.
+		$array		- The array to implode.
+		
+	Returns:
+		A string with the combined elements.
+*/
+function array_implode($glue, $separator, $array)
+{
+	if ( ! is_array( $array ) ) 
+	{
+		return $array;
+	}
+	
+	$string = array();
+	
+	foreach ( $array as $key => $val ) 
+	{
+	    if ( is_array( $val ) )
+	    {
+	        $val = implode( ',', $val );
+	    }
+	    
+	    $string[] = "{$key}{$glue}{$val}";
+	}
+	
+	return implode( $separator, $string );
+}
+
+//--------------------------------------------------------------------

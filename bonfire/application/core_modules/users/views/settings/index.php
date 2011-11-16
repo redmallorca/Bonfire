@@ -1,16 +1,21 @@
 <div class="well shallow-well">
-	<span>Username starts with: </span>
+	<?php render_filter_first_letter(lang('us_filter_first_letter')); ?>
 </div>
 
 <ul class="tabs" >
 	<li <?php echo $filter=='' ? 'class="active"' : ''; ?>><a href="<?php echo $current_url; ?>">All Users</a></li>
 	<li <?php echo $filter=='banned' ? 'class="active"' : ''; ?>><a href="<?php echo $current_url .'?filter=banned'; ?>">Banned</a></li>
 	<li <?php echo $filter=='deleted' ? 'class="active"' : ''; ?>><a href="<?php echo $current_url .'?filter=deleted'; ?>">Deleted</a></li>
-	<li <?php echo $filter=='inactive' ? 'class="active"' : ''; ?>><a href="#">Inactive</a></li>
 	<li <?php echo $filter=='role' ? 'class="active"' : ''; ?> class="dropdown" data-dropdown="dropdown">
-		<a href="#" class="drodown-toggle">By Role</a>
+		<a href="#" class="drodown-toggle">By Role <?php echo isset($filter_role) ? ": $filter_role" : ''; ?></a>
 		<ul class="dropdown-menu">
-			<li></li>
+		<?php foreach ($roles as $role) : ?>
+			<li>
+				<a href="<?php echo site_url(SITE_AREA .'/settings/users?filter=role&role_id='. $role->role_id) ?>">
+					<?php echo $role->role_name; ?>
+				</a>
+			</li>
+		<?php endforeach; ?>
 		</ul>
 	</li>
 </ul>
