@@ -80,6 +80,9 @@ $lang['db_debug_on']			= 'Debug On';
 $lang['db_strict_mode']			= 'Strict Mode';
 $lang['db_running_on_1']		= 'You are currently running on the';
 $lang['db_running_on_2']		= 'server.';
+$lang['db_serv_dev']			= 'Development';
+$lang['db_serv_test']			= 'Testing';
+$lang['db_serv_prod']			= 'Production';
 
 $lang['db_successful_save']		= 'Your settings were successfully saved.';
 $lang['db_erroneous_save']		= 'There was an error saving the settings.';

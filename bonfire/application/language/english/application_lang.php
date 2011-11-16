@@ -33,6 +33,7 @@ $lang['bf_online']				= 'Online';
 $lang['bf_offline']				= 'Offline';
 $lang['bf_top_number']			= 'Items <em>per</em> page:';
 $lang['bf_top_number_help']		= 'When viewing reports, how many items should be listed at a time?';
+$lang['bf_home']				= 'Home';
 
 $lang['bf_security']			= 'Security';
 $lang['bf_login_type']			= 'Login Type';

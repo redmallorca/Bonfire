@@ -1,43 +1,12 @@
-<div class="view split-view">
-	<!-- List -->
+		<!-- List -->
 	<div class="view">
 	<?php  empty ($settings['development']) ? $settings['development'] =array_shift(read_db_config('development','default')) :'';?>
 	<?php  empty ($settings['testing']) ? $settings['testing'] =array_shift(read_db_config('testing','default')) :'';?>
 	<?php  empty ($settings['production']) ? $settings['production'] =array_shift(read_db_config('production','default')) :'';?>
 
 		<h2 class="panel-title"><?php echo lang('db_servers'); ?></h2>
-		
-		<div class="scrollable">
-			<div class="list-view" id="role-list">
-			
-				<div class="list-item with-icon" data-id="development">
-					<img src="<?php echo Template::theme_url('images/database.png') ?>" />
-					
-					<p><b><?php echo lang('bf_env_dev'); ?></b><br/>
-					<span><?php echo $settings['development']['default']['hostname'] .'/'. $settings['development']['default']['database'] ?></span>
-					</p>
-				</div>
-				
-				<div class="list-item with-icon" data-id="testing">
-					<img src="<?php echo Template::theme_url('images/database.png') ?>" />
-					
-					<p><b><?php echo lang('bf_env_test'); ?></b><br/>
-					<span><?php echo $settings['testing']['default']['hostname'] .'/'. $settings['testing']['default']['database'] ?></span>
-					</p>
-				</div>
-				
-				<div class="list-item with-icon" data-id="production">
-					<img src="<?php echo Template::theme_url('images/database.png') ?>" />
-					
-					<p><b><?php echo lang('bf_env_prod'); ?></b><br/>
-					<span><?php echo $settings['production']['default']['hostname'] .'/'. $settings['production']['default']['database'] ?></span>
-					</p>
-				</div>
-			
-			</div>
-		</div>
+	</div>
 	
-	</div>	<!-- /vertical-panel -->
 	
 	<!-- Editor -->
 	<div id="content" class="view">
@@ -126,7 +95,7 @@
 						</table>
 					</div>
 					
-					<div class="column size1of3 last-column">
+					<div class="column size1of3">
 						<h3><?php echo lang('bf_env_prod'); ?></h3>
 						
 						<table>
@@ -165,7 +134,4 @@
 						</table>
 					</div>
 				</div>
-				
-		</div>	<!-- /scrollable -->
-	</div>	<!-- /content -->
-</div>	<!-- /vsplit -->
+			</div>

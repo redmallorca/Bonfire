@@ -36,11 +36,16 @@ class Settings extends Admin_Controller {
 		
 		Template::set('toolbar_title', 'Database Settings');
 		
+		Template::set_block('sub_nav', 'settings/_sub_nav');
 	}
 	
 	//--------------------------------------------------------------------
 	
-
+	/*
+		Method: index()
+		
+		Displays the current settings for databases in the 3 environments.
+	*/
 	public function index() 
 	{		
 		Assets::add_js($this->load->view('settings/database_js', null, true), 'inline');
@@ -52,6 +57,11 @@ class Settings extends Admin_Controller {
 	
 	//--------------------------------------------------------------------
 	
+	/*
+		Method: edit()
+		
+		Handles form display and saving of the database settings for each environment.
+	*/
 	public function edit() 
 	{
 		$this->load->library('form_validation');
