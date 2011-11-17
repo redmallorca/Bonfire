@@ -35,6 +35,8 @@ class Settings extends Admin_Controller {
 		$this->load->model('roles/role_model');
 		
 		$this->lang->load('users');
+		
+		Template::set_block('sub_nav', 'settings/sub_nav');
 	}
 	
 	//--------------------------------------------------------------------
@@ -167,13 +169,10 @@ class Settings extends Admin_Controller {
 				Template::set_message('User successfully created.', 'success');
 				Template::redirect(SITE_AREA .'/settings/users');
 			}
-			else 
-			{
-				Template::set_message('There was a problem creating the user: '. $this->user_model->error);
-			}
+
 		}
 		
-		Template::set('roles', $this->role_model->select('role_id, role_name, default')->find_all());
+		Template::set('roles', $this->role_model->select('role_id, role_name, default')->where('deleted', 0)->find_all());
 	
 		Template::set('toolbar_title', lang('us_create_user'));
 		Template::set_view('settings/user_form');
