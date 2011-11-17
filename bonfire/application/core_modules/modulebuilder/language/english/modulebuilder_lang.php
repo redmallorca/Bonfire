@@ -56,6 +56,7 @@ $lang['mb_out_lang']			= 'Language File';
 $lang['mb_out_lang_path']		= '%s_lang.php';
 $lang['mb_out_migration']		= 'Migration File(s)';
 $lang['mb_out_migration_path']	= 'migrations/002_Install_%s.php';
+$lang['mb_new_module']			= 'New Module';
 
 // FORM page
 $lang['mb_form_note'] = '<p><b>Fill out the fields you would like in your module (an "id" field is created automatically).  If you want to create the SQL for a DB table check the "Create Module Table" box.</b></p><p>This form will generate a full CodeIgniter module (model, controller and views) and, if you choose, database Migration file(s).</p>';
@@ -109,7 +110,7 @@ $lang['mb_form_alpha']			= 'a-Z';
 $lang['mb_form_alpha_dash']		= 'a-Z, 0-9, and _-';
 $lang['mb_form_alpha_numeric']	= 'a-Z and 0-9';
 $lang['mb_form_add_fld_button'] = 'Add another field';
-$lang['mb_form_show_advanced']	= '(Toggle Advanced Options)';
+$lang['mb_form_show_advanced']	= 'Toggle Advanced Options';
 $lang['mb_form_show_more']		= '...toggle more rules...';
 $lang['mb_form_integer']		= 'Integers';
 $lang['mb_form_is_decimal']		= 'Decimal Numbers';
