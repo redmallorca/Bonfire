@@ -139,10 +139,6 @@ class Settings extends Admin_Controller {
 			{
 				Template::set_message(lang("permissions_edit_success"), 'success');
 			}
-			else 
-			{
-				Template::set_message(lang("permissions_edit_failure") . $this->permission_model->error, 'error');
-			}
 		}
 		
 		Template::set('permissions', $this->permission_model->find($id));
