@@ -1,5 +1,5 @@
 <br/>
-<p><?php echo lang('mig_intro'); ?></p>
+<p class="intro"><?php echo lang('mig_intro'); ?></p>
 
 <?php if ($this->config->item('migrations_enabled') === false) :?>
 

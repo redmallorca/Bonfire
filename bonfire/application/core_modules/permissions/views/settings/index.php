@@ -6,7 +6,7 @@
 		<?php 	$record = (array)$record; ?>
 		<tr>
 			<td>
-				<input type="checkbox" name="checked[]" />
+				<input type="checkbox" name="checked[]" value="<?php echo $record['permission_id'] ?>" />
 			</td>
 			<td><?php e($record['permission_id']) ?></td>			
 			<td>

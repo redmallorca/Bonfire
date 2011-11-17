@@ -171,6 +171,11 @@ p small {
   font-size: 85%;
   color: #bfbfbf;
 }
+p.intro {
+	margin: 0 4em 2em 4em;
+	font-size: 125%;
+	color: #777;
+}
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
   color: #404040;
