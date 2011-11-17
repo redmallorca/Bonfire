@@ -21,6 +21,7 @@
 	THE SOFTWARE.
 */
 
+$lang['role_intro']					= 'Roles allow you to define the abilities that a user can have.';
 $lang['role_manage']				= 'Manage User Roles';
 $lang['role_no_roles']				= 'There are not any roles in the system.';
 $lang['role_create_button']			= 'Create a new role.';

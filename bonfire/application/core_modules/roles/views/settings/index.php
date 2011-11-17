@@ -1,3 +1,5 @@
+<p class="intro"><?php e(lang('role_intro')) ?></p>
+
 <?php if (isset($role_counts) && is_array($role_counts) && count($role_counts)) : ?>
 	
 	<table cellspacing="0">

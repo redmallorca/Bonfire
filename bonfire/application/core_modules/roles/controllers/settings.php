@@ -56,7 +56,7 @@ class Settings extends Admin_Controller {
 		
 		Template::set('deleted_users', $this->user_model->count_all(true));
 	
-		Template::set('roles', $this->role_model->find_all());
+		Template::set('roles', $this->role_model->where('deleted', 0	)->find_all());
 	
 		Template::set('toolbar_title', lang("role_manage"));
 		Template::render();
@@ -72,10 +72,6 @@ class Settings extends Admin_Controller {
 			{
 				Template::set_message('Role successfully created.', 'success');
 				Template::redirect(SITE_AREA .'/settings/roles');
-			}
-			else 
-			{
-				Template::set_message('There was a problem creating the role: '. $this->role_model->error, 'error');
 			}
 		}
 	
@@ -105,10 +101,6 @@ class Settings extends Admin_Controller {
 				Template::set_message('Role successfully saved.', 'success');
 				// redirect to update the sidebar which will show old name otherwise.
 				Template::redirect(SITE_AREA .'/settings/roles');
-			}
-			else 
-			{
-				Template::set_message('There was a problem saving the role: '. $this->role_model->error);
 			}
 		}
 		
