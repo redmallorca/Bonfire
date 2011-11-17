@@ -89,17 +89,18 @@
 
 <?php if (has_permission('Activities.Own.Delete')): ?>
 <div class="box delete rounded">
-	<a class="btn danger" id="delete-activity_own"><?php echo lang('activity_own_delete'); ?></a>
+	
 	<?php echo lang('activity_delete_own_note'); ?>
 	<select id="activity_own_select">
 		<option value="<?php echo $this->auth->user_id(); ?>"><?php echo $this->auth->username(); ?></option>))
 	</select>
+	
+	<br/><a class="btn danger" id="delete-activity_own"><?php echo lang('activity_own_delete'); ?></a>
 </div>
 <?php endif; ?>
 
 <?php if (has_permission('Activities.User.Delete')): ?>
 <div class="box delete rounded">
-	<a class="btn danger" id="delete-activity_user"><?php echo lang('activity_user_delete'); ?></a>
 	<?php echo lang('activity_delete_user_note'); ?>
 	<select id="activity_user_select">
 		<option value="all"><?php echo lang('activity_all_users'); ?></option>
@@ -107,12 +108,13 @@
 		<option value="<?php echo $au->id; ?>"><?php echo $au->username; ?></option>
 	<?php endforeach; ?>
 	</select>
+	
+	<br/><a class="btn danger" id="delete-activity_user"><?php echo lang('activity_user_delete'); ?></a>
 </div>
 <?php endif; ?>
 
 <?php if (has_permission('Activities.Module.Delete')): ?>
 <div class="box delete rounded">
-	<a class="btn danger" id="delete-activity_module"><?php echo lang('activity_module_delete'); ?></a>
 	<?php echo lang('activity_delete_module_note'); ?>
 	<select id="activity_module_select">
 		<option value="all"><?php echo lang('activity_all_modules'); ?></option>
@@ -121,12 +123,13 @@
 		<option value="<?php echo $mod; ?>"><?php echo $mod; ?></option>
 	<?php endforeach; ?>
 	</select>
+	
+	<br/><a class="btn danger" id="delete-activity_module"><?php echo lang('activity_module_delete'); ?></a>
 </div>
 <?php endif; ?>
 
 <?php if (has_permission('Activities.Date.Delete')): ?>
 <div class="box delete rounded">
-	<a class="btn danger" id="delete-activity_date"><?php echo lang('activity_date_delete'); ?></a>
 	<?php echo lang('activity_delete_date_note'); ?>
 	<select id="activity_date_select">
 		<option value="all"><?php echo lang('activity_all_dates'); ?></option>
@@ -134,5 +137,7 @@
 		<option value="<?php echo $activity->activity_id; ?>"><?php echo $activity->created_on; ?></option>
 	<?php endforeach; ?>
 	</select>
+	
+	<br/><a class="btn danger" id="delete-activity_date"><?php echo lang('activity_date_delete'); ?></a>
 </div>
 <?php endif; ?>
