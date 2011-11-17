@@ -29,3 +29,5 @@ $lang['permissions_deleted']			= 'deleted';
 $lang['permissions_permission']			= 'Permission';
 $lang['permissions_deleted']			= 'Permissions deleted';
 $lang['permissions_del_error']			= 'Unable to delete Permissions: ';
+$lang['permissions_intro']				= 'Permissions provide fine-grained control over what each role is allowed to do.';
+$lang['permissions_matrix']				= 'Permissions Matrix';

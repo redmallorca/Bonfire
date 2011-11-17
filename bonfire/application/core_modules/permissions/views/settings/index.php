@@ -1,3 +1,5 @@
+<p class="intro"><?php e(lang('permissions_intro')) ?></p>
+
 <?php echo $this->dataset->table_open(); ?>
 
 <?php if (isset($results) && is_array($results) && count($results)) : ?>

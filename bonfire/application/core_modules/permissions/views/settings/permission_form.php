@@ -1,29 +1,25 @@
-<?php if (validation_errors()) : ?>
-<div class="notification error">
-	<?php echo validation_errors(); ?>
-</div>
-<?php endif; ?>
-
 <?php // Change the css classes to suit your needs    
 	if( isset($permissions) ) {
 		$permissions = (array)$permissions;
 	}
 	$id = isset($permissions['permission_id']) ? "/".$permissions['permission_id'] : '';
 ?>
-
+<br/>
 <?php echo form_open($this->uri->uri_string(), 'class="constrained ajax-form"'); ?>
 
-	<div class="clearfix">
+	<div class="clearfix <?php echo form_has_error('name') ? 'error' : ''; ?>">
         <?php echo form_label(lang('permissions_name').'<span class="required">*</span>', 'name'); ?>
     	<div class="input">
     	    <input id="name" type="text" name="name" maxlength="30" value="<?php echo set_value('name', isset($permissions['name']) ? $permissions['name'] : ''); ?>"  />
+    	    <span class="help-inline"><?php echo form_error('name'); ?></span>
 		</div>
 	</div>
 
-	<div class="clearfix">
+	<div class="clearfix <?php echo form_has_error('description') ? 'error' : ''; ?>">
         <?php echo form_label(lang('permissions_description'), 'description'); ?>
         <div class="input">
 	        <input id="description" type="text" name="description" maxlength="100" value="<?php echo set_value('description', isset($permissions['description']) ? $permissions['description'] : ''); ?>"  />
+	        <span class="help-inline"><?php echo form_error('description'); ?></span>
 		</div>
 	</div>
 

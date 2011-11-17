@@ -114,10 +114,6 @@ class Settings extends Admin_Controller {
 				Template::set_message(lang("permissions_create_success"), 'success');
 				Template::redirect(SITE_AREA .'/settings/permissions');
 			}
-			else 
-			{
-				Template::set_message(lang("permissions_create_failure") . $this->permission_model->error, 'error');
-			}
 		}
 	
 		Template::set('toolbar_title', lang("permissions_create_new_button"));
