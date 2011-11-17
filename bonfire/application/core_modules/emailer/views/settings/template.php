@@ -6,7 +6,7 @@
 		<legend><?php echo lang('em_header'); ?></legend>
 		<div class="clearfix">
 			<div class="input">
-				<textarea name="header" rows="15" class="span12"><?php echo htmlspecialchars_decode($this->load->view('email/_header', null, true)) ;?></textarea>
+				<textarea name="header" rows="15" style="width: 70%"><?php echo htmlspecialchars_decode($this->load->view('email/_header', null, true)) ;?></textarea>
 			</div>
 		</div>
 	</fieldset>
@@ -17,7 +17,7 @@
 		<div class="clearfix">
 			<label for="footer"></label>
 			<div class="input">
-				<textarea name="footer" rows="15" class="span12"><?php echo htmlspecialchars_decode($this->load->view('email/_footer', null, true)) ;?></textarea>
+				<textarea name="footer" rows="15" style="width: 70%"><?php echo htmlspecialchars_decode($this->load->view('email/_footer', null, true)) ;?></textarea>
 			</div>
 		</div>
 	</fieldset>
