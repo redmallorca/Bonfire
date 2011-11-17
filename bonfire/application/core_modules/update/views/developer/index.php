@@ -6,7 +6,7 @@
 	<h3><?php echo lang('up_edge_commits'); ?></h3>
 	<p class="small"><?php echo lang('up_branch'); ?></p>
 
-	<table>
+	<table class="zebra-striped">
 		<thead>
 			<tr>
 				<th style="width: 8em"><?php echo lang('up_author'); ?></th>
