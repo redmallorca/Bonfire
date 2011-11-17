@@ -215,7 +215,7 @@ class Admin_Controller extends Authenticated_Controller {
 			
 			if (!$this->input->is_cli_request() && $this->settings_lib->item('site.show_profiler'))
 			{
-				$this->output->enable_profiler(false);
+				$this->output->enable_profiler(true);
 			}
 		}
 		

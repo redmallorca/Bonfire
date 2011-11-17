@@ -99,8 +99,8 @@ var ci_profiler_bar = {
 };
 
 // Replace any existing profile data
-if (this['head']) { // IE 7 check
-	head.ready(function(){
+if (jQuery) { 
+	$(document).ready(function(){
 		var html = $('#codeigniter-profiler').clone();
 		$('#codeigniter-profiler').remove();
 		$('#debug').hide().empty().append(html).fadeIn('fast');
