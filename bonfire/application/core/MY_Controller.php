@@ -74,6 +74,9 @@ class Base_Controller extends MX_Controller {
 		$this->previous_page = $this->session->userdata('previous_page');
 		$this->requested_page = $this->session->userdata('requested_page');
 		
+		$this->load->library('ui/contexts');
+		$this->load->library('user_agent');
+		
 		// Pre-Controller Event
 		Events::trigger('after_controller_constructor', get_class($this));
 	}
@@ -108,7 +111,7 @@ class Front_Controller extends Base_Controller {
 		{
 			$this->load->library('Console');
 			
-			if (!$this->input->is_cli_request() && $this->settings_lib->item('site.show_front_profiler'))
+			if (!$this->input->is_cli_request() && $this->settings_lib->item('site.show_front_profiler') && !$this->agent->is_mobile())
 			{
 				$this->output->enable_profiler(true);
 			}
@@ -213,7 +216,7 @@ class Admin_Controller extends Authenticated_Controller {
 		{
 			$this->load->library('Console');
 			
-			if (!$this->input->is_cli_request() && $this->settings_lib->item('site.show_profiler'))
+			if (!$this->input->is_cli_request() && $this->settings_lib->item('site.show_profiler') && !$this->agent->is_mobile())
 			{
 				$this->output->enable_profiler(true);
 			}
