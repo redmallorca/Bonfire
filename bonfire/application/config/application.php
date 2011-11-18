@@ -23,16 +23,16 @@ $config['auth.use_extended_profile'] = 0;
 	THE SOFTWARE.
 */
 
-$config['site.title'] = "";
-$config['site.system_email'] = "";
+$config['site.title'] = "Bonfire Testsite with a really long name";
+$config['site.system_email'] = "Lonnieje@gmail.com";
 $config['site.status'] = 1;		// 0 = offline, 1 = online
 $config['site.list_limit'] = 25;
  
 //--------------------------------------------------------------------
 // !Console/Profiler
 //--------------------------------------------------------------------
-$config['site.show_profiler'] = 0;
-$config['site.show_front_profiler'] = 0;
+$config['site.show_profiler'] = 1;
+$config['site.show_front_profiler'] = 1;
  
 //--------------------------------------------------------------------
 // !For Update messages

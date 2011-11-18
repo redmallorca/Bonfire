@@ -72,7 +72,6 @@ body {
   padding-top: 90px;
 }
 .container {
-  width: 940px;
   margin-left: auto;
   margin-right: auto;
   zoom: 1;
@@ -892,6 +891,7 @@ table .column-check {
   line-height: 19px;
   text-decoration: none;
 }
+.nav ul { text-align: left; }
 .topbar div > ul a:hover, .nav a:hover {
   color: #ffffff;
   text-decoration: none;
@@ -2030,6 +2030,8 @@ noscript {
 	background: #333;
 	min-width: 160px;
 	border-left: 1px solid #000;
+	margin-left: 28px;
+	padding-left: 0;
 	-webkit-border-radius: 0 6px 6px 0;
 	-moz-border-radius: 0 6px 6px 0;
 	border-radius: 0 6px 6px 0;
@@ -2080,9 +2082,42 @@ noscript {
 }
 
 /*--------------------------------------------------------------------
+	Mobile Specific
+--------------------------------------------------------------------*/
+body.mobile{
+	padding-top: 98px;
+}
+.mobile .secondary-nav {
+	display: block;
+}
+.mobile .secondary-nav h1 {
+	line-height: 1.8;
+	font-size: 20px;
+	font-wieght: normal;
+	color: #fff;
+	margin: 0 0 0 10px;
+	padding: 0;
+	height: 1.8em;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.mobile > .container { padding: 0 10px; }
+
+.mobile > footer {
+	background: #555;
+	color: #e5e5e5;
+}
+.mobile > footer a:link, 
+.mobile > footer a:visited { color: #fff !important; }
+.mobile > footer .container { padding: 0 10px; }
+
+
+/*--------------------------------------------------------------------
 	Media Queries
 --------------------------------------------------------------------*/
 
+/*
 .container {
 	width: 320px;
 	padding: 0;
@@ -2095,6 +2130,8 @@ noscript {
 .topbar .container { margin: 0 auto; padding: 0; }
 .secondary-nav .dropdown-menu { display: none; margin-top: -2; left: 0; right: auto; }
 .nav ul { text-align: left; }
+*/
+
 
 /* Mobile Landscape */
 @media only screen and (min-width: 481px) {

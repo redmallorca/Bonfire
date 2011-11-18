@@ -911,18 +911,41 @@ class Template {
 	A shorthand method that allows views (from the current/default themes)
 	to be included in any other view.
 	
+	This function also allows for a very simple form of mobile templates. If being
+	viewed from a mobile site, it will attempt to load a file whose name is prefixed
+	with 'mobile_'. If that file is not found it will load the regular view.
+	
+	Examples:
+		Rendering a view named 'index', the mobile version would be 'mobile_index'.
+	
 	Parameters:
 		$view	- the name of the view to render.
 		$data	- an array of data to pass to the view.
+		$ignore_mobile	- If TRUE, will not change the view name based on mobile viewing.
+						  If FALSE, will attempt to load a file prefixed with 'mobile_'
 */
-function theme_view($view=null, $data=null)
+function theme_view($view=null, $data=null, $ignore_mobile=false)
 {
 	if (empty($view)) return '';
 	
 	$ci =& get_instance();
 	
 	$output ='';
-	Template::load_view($view, $data, null, true, $output);
+	
+	// If we're allowed, try to load the mobile version 
+	// of the file.
+	if (!$ignore_mobile && $ci->agent->is_mobile())
+	{
+		Template::load_view('mobile_'. $view, $data, null, true, $output);
+	}
+	
+	// If output is empty, then either no mobile file was found
+	// or we weren't looking for one to begin with.
+	if (empty($output))
+	{
+		Template::load_view($view, $data, null, true, $output);
+	}
+	
 	return $output;
 }
 
