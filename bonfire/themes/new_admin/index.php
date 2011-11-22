@@ -9,10 +9,12 @@
 ?>
 <?php echo theme_view('_header'); ?>
 
-<div class="container">
-	<?php echo Template::message(); ?>	
+<div class="main">
+	<div class="container">
+		<?php echo Template::message(); ?>	
 
-	<?php echo Template::yield(); ?>
+		<?php echo Template::yield(); ?>
+	</div>
 </div>
 	
 <?php echo theme_view('_footer'); ?>

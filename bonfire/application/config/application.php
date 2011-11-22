@@ -23,8 +23,8 @@ $config['auth.use_extended_profile'] = 0;
 	THE SOFTWARE.
 */
 
-$config['site.title'] = "Bonfire Testsite with a really long name";
-$config['site.system_email'] = "Lonnieje@gmail.com";
+$config['site.title'] = "Bonfire - Jumpstart Your CodeIgniter Applications";
+$config['site.system_email'] = "lonnieje@gmail.com";
 $config['site.status'] = 1;		// 0 = offline, 1 = online
 $config['site.list_limit'] = 25;
  

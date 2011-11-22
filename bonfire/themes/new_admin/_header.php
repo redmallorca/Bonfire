@@ -16,7 +16,7 @@
 	});
 	</script>
 </head>
-<body class="mobile">
+<body class="desktop">
 
 	<noscript>
 		<p>Javascript is required to use Bonfire's admin.</p>
