@@ -42,6 +42,7 @@ $lang['db_database']			= 'Database';
 $lang['db_drop']				= 'Drop';
 $lang['db_repair']				= 'Repair';
 $lang['db_optimize']			= 'Optimize';
+$lang['db_migrations']			= 'Migrations';
 
 $lang['db_delete_note']			= 'Delete selected backup files: ';
 $lang['db_no_backups']			= 'No previous backups were found.';

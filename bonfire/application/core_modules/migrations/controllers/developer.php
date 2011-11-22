@@ -31,8 +31,10 @@ class Developer extends Admin_Controller {
 		$this->auth->restrict('Bonfire.Database.Manage');
 		
 		$this->config->load('migrations');
-		$this->load->library('Migrations');	
+		$this->load->library('Migrations');
 		$this->lang->load('migrations');
+		
+		Template::set_block('sub_nav', 'database/developer/_sub_nav');
 	}
 
 	//--------------------------------------------------------------------

@@ -1987,6 +1987,7 @@ noscript {
 	font-weight: lighter;
 	padding: 0 10px;
 	border-left: 1px solid #f6f6f6;
+	cursor: pointer;
 }
 #sub-nav a:hover {
 	color: #666;
