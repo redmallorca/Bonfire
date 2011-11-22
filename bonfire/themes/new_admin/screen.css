@@ -175,9 +175,11 @@ p small {
   color: #bfbfbf;
 }
 p.intro {
-	margin: 0 4em 2em 4em;
+	margin: 0 auto 2em auto;
 	font-size: 125%;
 	color: #777;
+	max-width: 45em;
+	text-align: center;
 }
 h1, h2, h3, h4, h5, h6 {
   font-weight: bold;
@@ -1247,11 +1249,11 @@ a.menu:after, .dropdown-toggle:after {
 footer {
   padding-top: 17px;
   border-top: 4px solid #333;
-  color: #888;
+  color: #aaa;
   font-size: 90%;
 }
 footer a {
-	color: #555 !important;
+	color: #ccc !important;
 	text-decoration: underline !important;
 }
 .page-header {
