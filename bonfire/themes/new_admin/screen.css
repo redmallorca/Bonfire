@@ -888,7 +888,7 @@ table .column-check {
   border-top: 1px solid #444;
 }
 .topbar div > ul > li, .nav > li {
-  display: block;
+  display: inherit;
 }
 .topbar div > ul a, .nav a {
   display: block;
@@ -1134,7 +1134,6 @@ a.menu:after, .dropdown-toggle:after {
   display: block;
 }
 .tabs {
-  float: left;
   width: 100%;
   border-bottom: 1px solid #ddd;
 }
@@ -2107,6 +2106,22 @@ a.menu::after, .dropdown-toggle::after { display: inline-block; }
 	right: 0;
 }
 
+.desktop h1.branding {
+	line-height: 40px;
+	font-size: 16px;
+	font-wieght: normal;
+	color: #fff;
+	margin: 0;
+	padding: 0;
+	height: 1.8em;
+	width: 200px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	display: inline-block;
+	float: left;
+}
+
 /*--------------------------------------------------------------------
 	Mobile Specific
 --------------------------------------------------------------------*/
@@ -2157,6 +2172,37 @@ body.mobile{
 .mobile > footer a:visited { color: #fff !important; }
 .mobile > footer .container { padding: 0 10px; }
 
+.mobile a.menu::after, 
+.mobile .dropdown-toggle::after { display: none; }
+
+.mobile .tabs > li > a {
+	font-size: 11px;
+	line-height: 2.0;
+}
+.mobile #sub-nav, .mobile #nav-bar h1 { 
+	display: block; 
+	float: none;
+	width: 100%;
+}
+.mobile #nav-bar h1 {
+	border-bottom: 1px solid #ccc;
+}
+
+/* Mobile SubNav */
+.topbar div > ul.mobile_nav,
+.topbar div > .mobile_nav ul {
+	display: none;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	background: #555;
+}
+.topbar div > ul.mobile_nav ul { display: none; }
+.topbar div > .mobile_nav li a {
+	padding: 5px 15px;
+	border-bottom: #999;
+}
 
 /*--------------------------------------------------------------------
 	Media Queries

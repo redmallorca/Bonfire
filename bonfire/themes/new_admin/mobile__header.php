@@ -1,3 +1,6 @@
+<?php 
+	Assets::add_js('mobile');
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -17,7 +20,7 @@
 	</script>
 	<script type="text/javascript">
 	(function(doc) {
-	
+		// Fix viewport scaling when changing device orientation.
 		var addEvent = 'addEventListener',
 		    type = 'gesturestart',
 		    qsa = 'querySelectorAll',
@@ -54,9 +57,10 @@
 					
 					<div class="clearfix"></div>
 				</div>
-				<?php echo Contexts::render_menu('both'); ?>
+				<?php echo Contexts::render_menu('both', true); ?>
 			</div><!-- /container -->
 			<div style="clearfix"></div>
+			<?php echo Contexts::render_mobile_navs(); ?>
 		</div><!-- /topbar-inner -->
 		
 	</div><!-- /topbar -->

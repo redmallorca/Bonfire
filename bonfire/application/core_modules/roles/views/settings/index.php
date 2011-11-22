@@ -2,13 +2,13 @@
 
 <?php if (isset($role_counts) && is_array($role_counts) && count($role_counts)) : ?>
 	
-	<table cellspacing="0">
+	<table class="zebra-striped">
 		<thead>
 			<tr>
-				<th><?php echo lang('role_account_type'); ?></th>
+				<th style="width: 10em"><?php echo lang('role_account_type'); ?></th>
 				<th><?php echo lang('role_description') ?></th>
-				<th class="text-center"># <?php echo lang('bf_users'); ?></th>
-				<th class="text-center">% <?php echo lang('bf_users'); ?></th>
+				<th class="text-center" style="width: 5em"># <?php echo lang('bf_users'); ?></th>
+				<th class="text-center" style="width: 5em">% <?php echo lang('bf_users'); ?></th>
 			</tr>
 		</thead>
 		<tbody>

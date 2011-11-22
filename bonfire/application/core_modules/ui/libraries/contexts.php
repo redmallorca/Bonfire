@@ -90,8 +90,15 @@ class Contexts {
 		Method: render_menu()
 		
 		Renders a list-based menu (with submenus) for each context.
+		
+		Parameters:
+			$mode	- What to display in the top menu. Either 'icon', 'text', or 'both'.
+			$top_level_only	- If TRUE, will only display the top-level links.
+			
+		Returns: 
+			A string with the built navigation.
 	*/
-	public static function render_menu($mode='icon')
+	public static function render_menu($mode='icon', $top_level_only = false)
 	{
 		self::$ci->benchmark->mark('context_menu_start');
 	
@@ -128,7 +135,7 @@ class Contexts {
 				$id = 'tb_'. $context;
 				$title = lang('bf_context_'. $context);
 				
-				$nav .= "<li class='dropdown {$class}'><a href='{$url}' id='{$id}' class='dropdown-toggle' title='{$title}'>";
+				$nav .= "<li class='dropdown menu-link {$class}'><a href='{$url}' id='{$id}' class='dropdown-toggle' title='{$title}' data-id='{$context}_menu'>";
 				
 				// Image
 				if ($mode=='icon' || $mode=='both')
@@ -144,7 +151,10 @@ class Contexts {
 				
 				$nav .= "</a>";
 				
-				$nav .= self::context_nav($context);
+				if (!$top_level_only)
+				{
+					$nav .= self::context_nav($context);
+				}
 				
 				$nav .= "</li>";
 			}
@@ -161,6 +171,37 @@ class Contexts {
 	//--------------------------------------------------------------------
 	
 	/*
+		Method: render_mobile_navs()
+		
+		Creates a series of divs that each contain a <ul> of links within
+		that context. This is intended for the tab-style mobile navigation.
+		
+		Parameters: 
+			none
+			
+		Returns:
+			A string with the navigation lists.
+	*/
+	public static function render_mobile_navs() 
+	{
+		$contexts = self::$ci->config->item('contexts');
+		
+		$out = '';
+		
+		foreach ($contexts as $context)
+		{
+			$out .= "<ul id='{$context}_menu' class='mobile_nav'>";
+			$out .= self::context_nav($context, '', true);
+			$out .= "</ul>";
+		}
+		
+		return $out;
+	}
+	
+	//--------------------------------------------------------------------
+	
+	
+	/*
 		Method: context_nav()
 		
 		Builds the main navigation menu for each context.
@@ -171,7 +212,7 @@ class Contexts {
 		Returns:
 			The HTML necessary to display the menu.
 	*/
-	public function context_nav($context=null) 
+	public function context_nav($context=null, $class='dropdown-menu', $ignore_ul=false) 
 	{		
 		// Get a list of modules with a controller matching
 		// $context ('content', 'settings', 'reports', or 'developer')
@@ -190,7 +231,7 @@ class Contexts {
 		// Do we have any actions? 
 		if (!count(self::$actions))
 		{
-			return '<ul class="dropdown-menu"></ul>';
+			return '<ul class="'. $class .'"></ul>';
 		}
 		
 		// Grab our module permissions so we know who can see what on the sidebar
@@ -228,7 +269,7 @@ class Contexts {
 			}
 		}
 
-		$menu = self::build_sub_menu($context);
+		$menu = self::build_sub_menu($context, $ignore_ul);
 		
 		self::$actions = array();
 		
@@ -237,6 +278,8 @@ class Contexts {
 	
 	//--------------------------------------------------------------------
 
+	
+	
 	//--------------------------------------------------------------------
 	// !UTILITY METHODS
 	//--------------------------------------------------------------------
@@ -272,17 +315,22 @@ class Contexts {
 	//--------------------------------------------------------------------
 
 	/*
-		Method: build_menu()
+		Method: build_sub_menu()
 		
 		Handles building out the HTML for the menu.
 		
 		Parameters:
 			$actions	- an array of action name and action url.	
 	*/
-	public static function build_sub_menu($context) 
+	public static function build_sub_menu($context, $ignore_ul=false) 
 	{	
+		$list = '';
+	
 		// Build a ul to return
-		$list = "<ul class='". self::$child_class ."'>\n";
+		if (!$ignore_ul)
+		{
+			$list = "<ul class='". self::$child_class ."'>\n";
+		}
 		
 		foreach (self::$menu as $topic_name => $topic)
 		{		
@@ -330,7 +378,10 @@ class Contexts {
 			
 		}
 		
-		$list .= "</ul>\n";
+		if (!$ignore_ul)
+		{
+			$list .= "</ul>\n";
+		}
 		
 		self::$menu = array();
 		

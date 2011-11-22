@@ -1,10 +1,3 @@
-<style>
-#flex_table { margin: 0; }
-#flex_table th { font-weight: bold; }
-#flex_table th.sorting_desc, #flex_table th.sorting_asc { background-color: #F5F5F5;}
-</style>
-
-<div class="scrollable" id="ajax-content">
 	<?php  if (count($select_options) > 2): // one for all, one for the only choice = 2 ?>
 	<div class="box select rounded">
 		<h3><?php echo lang('activity_filter_head'); ?></h3>
@@ -25,7 +18,7 @@
 	<?php else : ?>
 	
 	<div id="user_activities">
-		<table id="flex_table">
+		<table class="zebra-striped">
 			<thead>
 				<tr>
 					<th><?php echo lang('activity_user'); ?></th>
@@ -50,4 +43,3 @@
 		</table>
 	</div>
 	<?php endif; ?>	
-</div>

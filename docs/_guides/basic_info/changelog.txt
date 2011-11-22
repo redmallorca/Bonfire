@@ -14,6 +14,7 @@ Additions:
 - New Admin theme is a drastic tweak. Simplified so no more reliance on AJAX interface. Built on a modified version of Bootstrap.css, this theme is a responsive layout that can be used on smartphones, tablets, and your desktop computer.
 - New function in the application_helper: *e()* is a convenience function for echoing htmlentities($str) in views. Highly recommended to replace all uses of echo when the user would have entered the data.
 - New function in the application_helper: *array_implode()* allows imploding multi-dimensional arrays with proper glues for multiple level support.
+- Template libs theme_view() method now allows for mobile view overrides. 
 
 Bugs:
 - #236 - Email Settings - fixing the password validation

@@ -25,6 +25,8 @@
 	<div class="topbar" id="topbar" data-dropdown="dropdown">
 		<div class="topbar-inner">
 			<div class="container">
+				<h1 class="branding"><?php e(config_item('site.title')); ?></h1>
+			
 				<ul class="nav secondary-nav">
 					<li class="dropdown">
 						<a href="<?php echo site_url(SITE_AREA .'/settings/users/edit/'. $this->auth->user_id()) ?>" id="tb_email" class="dropdown-toggle" title="<?php echo lang('bf_user_settings') ?>">
