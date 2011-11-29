@@ -8,7 +8,7 @@
 
 	<fieldset>
 		<legend>Settings</legend>
-	
+
 		<div class="clearfix">
 			<label for="log_threshold"><?php echo lang('log_the_following'); ?></label>
 			<div class="input">
@@ -18,12 +18,12 @@
 					<option value="2" <?php echo ($log_threshold == 2) ? 'selected="selected"' : ''; ?>><?php echo lang('log_what_2'); ?></option>
 					<option value="3" <?php echo ($log_threshold == 3) ? 'selected="selected"' : ''; ?>><?php echo lang('log_what_3'); ?></option>
 					<option value="4" <?php echo ($log_threshold == 4) ? 'selected="selected"' : ''; ?>><?php echo lang('log_what_4'); ?></option>
-				</select>						   
-				
+				</select>
+
 				<span class="help-inline"><?php echo lang('log_what_note'); ?></span>
 			</div>
 		</div>
-	
+
 	</fieldset>
 
 	<div class="notification information">

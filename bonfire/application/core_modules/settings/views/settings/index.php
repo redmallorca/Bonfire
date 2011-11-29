@@ -13,7 +13,7 @@
 				<input type="text" name="title" class="span6" value="<?php echo isset($settings['site.title']) ? $settings['site.title'] : set_value('site.title') ?>" />
 			</div>
 		</div>
-		
+
 		<div class="clearfix">
 			<label for="system_email"><?php echo lang('bf_site_email') ?></label>
 			<div class="input">
@@ -21,7 +21,7 @@
 				<p class="help-inline"><?php echo lang('bf_site_email_help') ?></p>
 			</div>
 		</div>
-		
+
 		<div class="clearfix">
 			<label for="status"><?php echo lang('bf_site_status') ?></label>
 			<div class="input">
@@ -31,7 +31,7 @@
 				</select>
 			</div>
 		</div>
-		
+
 		<div class="clearfix">
 			<label for="list_limit"><?php echo lang('bf_top_number') ?></label>
 			<div class="input">
@@ -40,10 +40,10 @@
 			</div>
 		</div>
 	</fieldset>
-	
+
 	<fieldset>
 		<legend><?php echo lang('bf_security') ?></legend>
-		
+
 		<div class="clearfix">
 			<div class="input">
 				<div class="inputs-list">
@@ -54,7 +54,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="clearfix">
 			<label for="login_type"><?php echo lang('bf_login_type') ?></label>
 			<div class="input">
@@ -65,7 +65,7 @@
 				</select>
 			</div>
 		</div>
-		
+
 		<div class="clearfix">
 			<label><?php echo lang('bf_use_usernames') ?></label>
 			<div class="input">
@@ -91,7 +91,7 @@
 				</ul>
 			</div>
 		</div>
-		
+
 		<div class="clearfix">
 			<div class="input">
 				<div class="inputs-list">
@@ -102,7 +102,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="clearfix">
 			<label for="remember_length"><?php echo lang('bf_remember_time') ?></label>
 			<div class="input">
@@ -114,14 +114,14 @@
 				</select>
 			</div>
 		</div>
-	
+
 	</fieldset>
-	
+
 	<?php if ($this->auth->has_permission('Site.Developer.View')) : ?>
 	<!-- Developer Settings -->
 	<fieldset>
 		<legend>Developer</legend>
-		
+
 		<div class="clearfix">
 			<div class="input">
 				<ul class="inputs-list">
@@ -154,10 +154,10 @@
 				</ul>
 			</div>
 		</div>
-		
+
 	</fieldset>
 	<?php endif; ?>
-	
+
 	<div class="actions">
 		<input type="submit" name="submit" class="btn primary" value="<?php echo lang('bf_action_save') .' '. lang('bf_context_settings') ?>" />
 	</div>

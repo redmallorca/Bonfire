@@ -1,4 +1,4 @@
-<?php // Change the css classes to suit your needs    
+<?php // Change the css classes to suit your needs
 	if( isset($permissions) ) {
 		$permissions = (array)$permissions;
 	}
@@ -34,8 +34,8 @@
 		<div class="input">
 	        <?php echo form_dropdown('status', $options, set_value('status'))?>
 		</div>
-	</div>                                             
-                        
+	</div>
+
 
 	<div class="actions">
 
@@ -45,9 +45,9 @@
 	<?php if (isset($permissions)) : ?>
 	<div class="box delete rounded">
 		<h3><?php echo lang('permissions_delete_record'); ?></h3>
-		
+
 		<p><?php echo lang('permissions_delete_warning'); ?></p>
-		
+
 		<a class="btn danger" href="<?php echo site_url(SITE_AREA .'/settings/permissions/delete/'. $id); ?>" onclick="return confirm('<?php echo lang('permissions_delete_confirm'); ?>')"><?php echo lang('permissions_delete_record'); ?></a>
 	</div>
 	<?php endif; ?>

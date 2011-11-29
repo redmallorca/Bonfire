@@ -10,10 +10,10 @@
 			</div>
 		</div>
 	</fieldset>
-	
+
 	<fieldset>
 		<legend><?php echo lang('em_footer'); ?></legend>
-	
+
 		<div class="clearfix">
 			<label for="footer"></label>
 			<div class="input">

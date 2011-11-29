@@ -1,7 +1,7 @@
 <p class="intro"><?php e(lang('role_intro')) ?></p>
 
 <?php if (isset($role_counts) && is_array($role_counts) && count($role_counts)) : ?>
-	
+
 	<table class="zebra-striped">
 		<thead>
 			<tr>
@@ -17,15 +17,15 @@
 				<td><?php echo anchor(SITE_AREA .'/settings/roles/edit/'. $role->role_id, $role->role_name, 'class="ajaxify"') ?></td>
 				<td><?php e($role->description) ?></td>
 				<td class="text-center"><?php
-						$count = 0; 
+						$count = 0;
 						foreach ($role_counts as $r)
 						{
 							if ($role->role_name == $r->role_name)
 							{
 								$count = $r->count;
-							}						
+							}
 						}
-						
+
 						echo $count;
 					?>
 				</td>

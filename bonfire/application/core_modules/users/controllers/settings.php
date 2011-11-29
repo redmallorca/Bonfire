@@ -8,10 +8,10 @@
 	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 	copies of the Software, and to permit persons to whom the Software is
 	furnished to do so, subject to the following conditions:
-	
+
 	The above copyright notice and this permission notice shall be included in
 	all copies or substantial portions of the Software.
-	
+
 	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -24,39 +24,39 @@
 class Settings extends Admin_Controller {
 
 	//--------------------------------------------------------------------
-	
-	public function __construct() 
+
+	public function __construct()
 	{
 		parent::__construct();
-		
+
 		$this->auth->restrict('Site.Settings.View');
 		$this->auth->restrict('Bonfire.Users.View');
-		
+
 		$this->load->model('roles/role_model');
-		
+
 		$this->lang->load('users');
-		
+
 		Template::set_block('sub_nav', 'settings/sub_nav');
 	}
-	
+
 	//--------------------------------------------------------------------
 
-	public function _remap($method) 
-	{ 
+	public function _remap($method)
+	{
 		if (method_exists($this, $method))
 		{
 			$this->$method();
 		}
 	}
-	
+
 	//--------------------------------------------------------------------
-	
-	public function index() 
-	{ 
+
+	public function index()
+	{
 		$roles = $this->role_model->select('role_id, role_name')->where('deleted', 0)->find_all();
 		Template::set('roles', $roles);
-	
-		// Do we have any actions? 
+
+		// Do we have any actions?
 		if ($action = $this->input->post('submit'))
 		{
 			$checked = $this->input->post('checked');
@@ -71,7 +71,7 @@ class Settings extends Admin_Controller {
 					break;
 			}
 		}
-		
+
 		// Filters
 		$filter = $this->input->get('filter');
 		switch($filter)
@@ -98,20 +98,20 @@ class Settings extends Admin_Controller {
 				$this->user_model->where('users.deleted', 0);
 				break;
 		}
-		
+
 		// First Letter
 		$first_letter = $this->input->get('firstletter');
 		if (!empty($first_letter))
 		{
 			$this->user_model->where('SUBSTRING( LOWER(username), 1, 1)=', $first_letter);
 		}
-		
+
 		$this->load->helper('ui/ui');
-		
+
 		$this->load->library('ui/dataset');
 		$this->dataset->set_source('user_model', 'find_all');
 		$this->dataset->set_selects('users.id, users.role_id, username, first_name, last_name, email, last_login, banned, users.deleted, role_name');
-		
+
 		$columns = array(
 			array(
 				'field'		=> 'id',
@@ -133,31 +133,31 @@ class Settings extends Admin_Controller {
 				'width'		=> '10em'
 			)
 		);
-		
+
 		$this->dataset->columns($columns);
-		
+
 		$bulk_actions = array('ban', 'delete');
-		
+
 		$this->dataset->actions($bulk_actions);
-		
+
 		$this->dataset->initialize();
-		
+
 		Template::set('current_url', current_url());
 		Template::set('filter', $filter);
-		
+
 		Template::set('toolbar_title', lang('us_user_management'));
 		Template::render();
 	}
-	
+
 	//--------------------------------------------------------------------
-	
-	public function create() 
+
+	public function create()
 	{
 		$this->auth->restrict('Bonfire.Users.Add');
-	
+
 		$this->load->config('address');
 		$this->load->helper('address');
-	
+
 		if ($this->input->post('submit'))
 		{
 			if ($id = $this->save_user())
@@ -165,36 +165,36 @@ class Settings extends Admin_Controller {
 				$user = $this->user_model->find($id);
 				$log_name = $this->settings_lib->item('auth.use_own_names') ? $this->auth->user_name() : ($this->settings_lib->item('auth.use_usernames') ? $user->username : $user->email);
 				$this->activity_model->log_activity($this->auth->user_id(), lang('us_log_create').' '. $user->role_name . ': '.$log_name, 'users');
-				
+
 				Template::set_message('User successfully created.', 'success');
 				Template::redirect(SITE_AREA .'/settings/users');
 			}
 
 		}
-		
+
 		Template::set('roles', $this->role_model->select('role_id, role_name, default')->where('deleted', 0)->find_all());
-	
+
 		Template::set('toolbar_title', lang('us_create_user'));
 		Template::set_view('settings/user_form');
 		Template::render();
 	}
-	
+
 	//--------------------------------------------------------------------
-	
-	public function edit() 
+
+	public function edit()
 	{
 		$this->auth->restrict('Bonfire.Users.Manage');
-		
+
 		$this->load->config('address');
 		$this->load->helper('address');
-		
+
 		$user_id = $this->uri->segment(5);
 		if (empty($user_id))
 		{
 			Template::set_message(lang('us_empty_id'), 'error');
-			redirect(SITE_AREA .'/settings/users');			
+			redirect(SITE_AREA .'/settings/users');
 		}
-		
+
 		if ($this->input->post('submit'))
 		{
 			if ($this->save_user('update', $user_id))
@@ -202,12 +202,12 @@ class Settings extends Admin_Controller {
 				$user = $this->user_model->find($user_id);
 				$log_name = $this->settings_lib->item('auth.use_own_names') ? $this->auth->user_name() : ($this->settings_lib->item('auth.use_usernames') ? $user->username : $user->email);
 				$this->activity_model->log_activity($this->auth->user_id(), lang('us_log_edit') .': '.$log_name, 'users');
-			
+
 				Template::set_message('User successfully updated.', 'success');
 			}
 
 		}
-		
+
 		$user = $this->user_model->find($user_id);
 		if (isset($user) && has_permission('Permissions.'.$user->role_name.'.Manage'))
 		{
@@ -218,49 +218,49 @@ class Settings extends Admin_Controller {
 		else
 		{
 			Template::set_message(sprintf(lang('us_unauthorized'),$user->role_name), 'error');
-			redirect(SITE_AREA .'/settings/users');			
+			redirect(SITE_AREA .'/settings/users');
 		}
-		
+
 		Template::set('toolbar_title', lang('us_edit_user'));
-						
+
 		Template::render();
 	}
-	
+
 	//--------------------------------------------------------------------
-	
+
 	public function ban($users=false, $ban_message='')
 	{
 		if (!$users)
 		{
 			return;
 		}
-		
+
 		$this->auth->restrict('Bonfire.Users.Manage');
-		
+
 		foreach ($users as $user_id)
 		{
 			$data = array(
 				'banned'		=> 1,
 				'ban_message'	=> $ban_message
 			);
-		
+
 			$this->user_model->update($user_id, $data);
 		}
 	}
-	
+
 	//--------------------------------------------------------------------
-	
-	public function delete($users=null) 
-	{	
+
+	public function delete($users=null)
+	{
 		if (empty($users))
 		{
 			$users = array($this->uri->segment(5));
 		}
-		
+
 		if (!empty($users))
-		{	
+		{
 			$this->auth->restrict('Bonfire.Users.Manage');
-		
+
 			foreach ($users as $id)
 			{
 				$user = $this->user_model->find($id);
@@ -277,7 +277,7 @@ class Settings extends Admin_Controller {
 					else
 					{
 						Template::set_message(lang('us_action_not_deleted'). $this->user_model->error, 'error');
-					}							
+					}
 				}
 				else
 				{
@@ -287,8 +287,8 @@ class Settings extends Admin_Controller {
 					}
 					else
 					{
-						Template::set_message(sprintf(lang('us_unauthorized'),$user->role_name), 'error');	
-					}				
+						Template::set_message(sprintf(lang('us_unauthorized'),$user->role_name), 'error');
+					}
 				}
 			}
 		}
@@ -296,20 +296,20 @@ class Settings extends Admin_Controller {
 		{
 			Template::set_message(lang('us_empty_id'), 'error');
 		}
-		
+
 		redirect(SITE_AREA .'/settings/users');
 	}
-	
+
 	//--------------------------------------------------------------------
-	
-	public function purge() 
+
+	public function purge()
 	{
 		$user_id = $this->uri->segment(5);
-		
+
 		// Handle a single-user purge
 		if (!empty($user_id) && is_numeric($user_id))
 		{
-			$this->user_model->delete($user_id, true);	
+			$this->user_model->delete($user_id, true);
 		}
 		// Handle purging all deleted users...
 		else
@@ -317,7 +317,7 @@ class Settings extends Admin_Controller {
 			// Find all deleted accounts
 			$users = $this->user_model->where('users.deleted', 1)
 									  ->find_all(true);
-		
+
 			if (is_array($users))
 			{
 				foreach ($users as $user)
@@ -326,18 +326,18 @@ class Settings extends Admin_Controller {
 				}
 			}
 		}
-		
+
 		Template::set_message('Users Purged.', 'success');
-		
+
 		Template::redirect(SITE_AREA .'/settings/users');
 	}
-	
+
 	//--------------------------------------------------------------------
-	
-	public function restore() 
+
+	public function restore()
 	{
 		$id = $this->uri->segment(5);
-		
+
 		if ($this->user_model->update($id, array('users.deleted'=>0)))
 		{
 			Template::set_message('User successfully restored.', 'success');
@@ -346,34 +346,34 @@ class Settings extends Admin_Controller {
 		{
 			Template::set_message('Unable to restore user: '. $this->user_model->error, 'error');
 		}
-		
+
 		Template::redirect(SITE_AREA .'/settings/users');
 	}
-	
+
 	//--------------------------------------------------------------------
-	
-	
+
+
 	//--------------------------------------------------------------------
 	// !HMVC METHODS
 	//--------------------------------------------------------------------
-	
-	public function access_logs($limit=15) 
+
+	public function access_logs($limit=15)
 	{
 		$logs = $this->user_model->get_access_logs($limit);
-		
+
 		return $this->load->view('settings/access_logs', array('access_logs' => $logs), true);
 	}
-	
+
 	//--------------------------------------------------------------------
-	
-	
-		
+
+
+
 	//--------------------------------------------------------------------
 	// !PRIVATE METHODS
 	//--------------------------------------------------------------------
-	
-	public function unique_email($str) 
-	{	
+
+	public function unique_email($str)
+	{
 		if ($this->user_model->is_unique('email', $str))
 		{
 			return true;
@@ -384,36 +384,36 @@ class Settings extends Admin_Controller {
 			return false;
 		}
 	}
-	
+
 	//--------------------------------------------------------------------
-	
-	private function save_user($type='insert', $id=0) 
+
+	private function save_user($type='insert', $id=0)
 	{
 		if ($type == 'insert')
 		{
 			$this->form_validation->set_rules('email', 'Email', 'required|trim|callback_unique_email|valid_email|max_length[120]|xss_clean');
 			$this->form_validation->set_rules('password', 'Password', 'required|trim|strip_tags|max_length[40]|xss_clean');
 			$this->form_validation->set_rules('pass_confirm', 'Password (again)', 'required|trim|strip_tags|matches[password]|xss_clean');
-		} else 
+		} else
 		{
 			$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|max_length[120]|xss_clean');
 			$this->form_validation->set_rules('password', 'Password', 'trim|strip_tags|max_length[40]|xss_clean');
 			$this->form_validation->set_rules('pass_confirm', 'Password (again)', 'trim|strip_tags|matches[password]|xss_clean');
 		}
-		
+
 		if ($this->settings_lib->item('auth.use_usernames'))
 		{
 			$this->form_validation->set_rules('username', 'Username', 'required|trim|strip_tags|max_length[30]|callback_unique_username|xsx_clean');
 		}
-		
+
 		$required = false;
 		if ($this->settings_lib->item('auth.use_own_names'))
 		{
 			$required = 'required|';
-		} 
+		}
 		$this->form_validation->set_rules('first_name', lang('us_first_name'), $required.'trim|strip_tags|max_length[20]|xss_clean');
 		$this->form_validation->set_rules('last_name', lang('us_last_name'), $required.'trim|strip_tags|max_length[20]|xss_clean');
-		
+
 		if  ( ! $this->settings_lib->item('auth.use_extended_profile'))
 		{
 			$this->form_validation->set_rules('street1', 'Street 1', 'trim|strip_tags|xss_clean');
@@ -425,20 +425,20 @@ class Settings extends Admin_Controller {
 		{
 			return false;
 		}
-		
+
 		if ($type == 'insert')
 		{
 			return $this->user_model->insert($_POST);
 		}
 		else	// Update
-		{	
+		{
 			return $this->user_model->update($id, $_POST);
 		}
 	}
-	
+
 	//--------------------------------------------------------------------
-	
-	
+
+
 }
 
 // End User Admin class

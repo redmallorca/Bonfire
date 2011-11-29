@@ -20,11 +20,11 @@
 					<?php foreach ($fields['actions'] as $action) : ?>
 						<td>
 							<?php if (array_key_exists($action, $field_actions)) : ?>
-								<?php 
+								<?php
 									$perm_name = $domain_name .'.'. $field_name .'.'. $action;
 								?>
-								<input type="checkbox" name="role_permissions[]" class="" value="<?php echo $domains[$domain_name][$field_name][$action]['perm_id'] ?>" 
-								<?php 
+								<input type="checkbox" name="role_permissions[]" class="" value="<?php echo $domains[$domain_name][$field_name][$action]['perm_id'] ?>"
+								<?php
 									if (isset($domains[$domain_name][$field_name][$action]['value']) && $domains[$domain_name][$field_name][$action]['value'] == 1)
 									{
 										echo 'checked="checked"';
@@ -40,7 +40,7 @@
 		</tbody>
 	</table>
 	<?php endforeach; ?>
-	
+
 	<?php else: ?>
 
 	<div class="notification attention"><?php echo $authentication_failed; ?></div>

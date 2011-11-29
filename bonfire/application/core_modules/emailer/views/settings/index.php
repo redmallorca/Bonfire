@@ -5,7 +5,7 @@
 <?php endif; ?>
 
 <?php echo form_open(SITE_AREA .'/settings/emailer', 'class="constrained"'); ?>
-	
+
 <fieldset>
 	<legend>General Settings</legend>
 
@@ -16,7 +16,7 @@
 			<span class="help-inline"><?php echo lang('em_system_email_note'); ?></span>
 		</div>
 	</div>
-	
+
 	<div class="clearfix">
 		<label for="mailtype"><?php echo lang('em_email_type'); ?></label>
 		<div class="input">
@@ -26,7 +26,7 @@
 			</select>
 		</div>
 	</div>
-	
+
 	<div class="clearfix">
 		<label for="protocol"><?php echo lang('em_email_server'); ?></label>
 		<div class="input">
@@ -38,7 +38,7 @@
 		</div>
 	</div>
 </fieldset>
-	
+
 <fieldset>
 	<legend><?php echo lang('em_settings'); ?></legend>
 	<!-- PHP Mail -->
@@ -53,10 +53,10 @@
 			<input type="text" name="mailpath" class="medium" value="<?php echo isset($mailpath) ? $mailpath : '/usr/sbin/sendmail' ?>" />
 		</div>
 	</div>
-	
+
 	<!-- SMTP -->
 	<div id="smtp">
-	
+
 		<div class="clearfix">
 			<label for="smtp_host">SMTP <?php echo lang('em_server_address'); ?></label>
 			<div class="input">
@@ -70,21 +70,21 @@
 				<input type="text" name="smtp_user" class="medium" value="<?php echo isset($smtp_user) ? $smtp_user : set_value('smtp_user') ?>" />
 			</div>
 		</div>
-		
+
 		<div class="clearfix">
 			<label for="smtp_pass">SMTP <?php echo lang('bf_password'); ?></label>
 			<div class="input">
 				<input type="text" name="smtp_pass" class="medium" value="<?php echo isset($smtp_pass) ? $smtp_pass : set_value('smtp_pass') ?>" />
 			</div>
 		</div>
-		
+
 		<div class="clearfix">
 			<label for="smtp_port">SMTP <?php echo lang('em_port'); ?></label>
 			<div class="input">
 				<input type="text" name="smtp_port" class="medium" value="<?php echo isset($smtp_port) ? $smtp_port : set_value('smtp_port') ?>" />
 			</div>
 		</div>
-		
+
 		<div class="clearfix">
 			<label for="smptp_timeout">SMTP <?php echo lang('em_timeout_secs'); ?></label>
 			<div class="input">
@@ -106,16 +106,16 @@
 <p><?php echo lang('em_test_intro'); ?></p>
 
 <?php echo form_open(SITE_AREA .'/settings/emailer/test', array('class' => 'ajax-form', 'id'=>'test-form')); ?>
-	
+
 	<br/>
 	<div class="clearfix">
 		<label for="email"><?php echo lang('bf_email'); ?></label>
 		<div class="input">
-			<input type="email" name="test_email" id="test-email" value="<?php echo config_item('site.system_email') ?>" /> 
+			<input type="email" name="test_email" id="test-email" value="<?php echo config_item('site.system_email') ?>" />
 			<input type="submit" name="submit" class="btn" value="<?php echo lang('em_test_button'); ?>" />
 		</div>
 	</div>
-	
+
 	<div id="test-ajax"></div>
 
 <?php echo form_close(); ?>
@@ -125,7 +125,7 @@ head.ready(function(){
 	$('#server_type').change(function(){
 		// First, hide everything
 		$('#mail, #sendmail, #smtp').css('display', 'none');
-		
+
 		switch ($(this).val())
 		{
 			case 'mail':
@@ -139,17 +139,17 @@ head.ready(function(){
 				break;
 		}
 	});
-	
+
 	// since js is active, hide the server settings
 	$('#server_type').trigger('change');
 
 	// Email Test
 	$('#test-form').submit(function(e){
 		e.preventDefault();
-		
+
 		var email	= $('#test-email').val();
 		var url		= $(this).attr('action');
-		
+
 		$('#test-ajax').load(
 			url,
 			{

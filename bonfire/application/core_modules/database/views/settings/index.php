@@ -6,12 +6,12 @@
 
 		<h2 class="panel-title"><?php echo lang('db_servers'); ?></h2>
 	</div>
-	
-	
+
+
 	<!-- Editor -->
 	<div id="content" class="view">
 		<div class="scrollable" id="ajax-content">
-			
+
 				<div class="notification attention">
 					<p class="text-center"><?php echo lang('db_running_on_1'); ?> <b><?php echo ENVIRONMENT ?></b> <?php echo lang('db_running_on_2'); ?></p>
 				</div>
@@ -19,7 +19,7 @@
 				<div class="row">
 					<div class="column size1of3">
 						<h3><?php echo lang('bf_env_dev'); ?></h3>
-						
+
 						<table>
 							<tr>
 								<td><?php echo lang('db_hostname'); ?></td>
@@ -55,10 +55,10 @@
 							</tr>
 						</table>
 					</div>
-					
+
 					<div class="column size1of3">
 						<h3><?php echo lang('bf_env_test'); ?></h3>
-						
+
 						<table>
 							<tr>
 								<td><?php echo lang('db_hostname'); ?></td>
@@ -94,10 +94,10 @@
 							</tr>
 						</table>
 					</div>
-					
+
 					<div class="column size1of3">
 						<h3><?php echo lang('bf_env_prod'); ?></h3>
-						
+
 						<table>
 							<tr>
 								<td><?php echo lang('db_hostname'); ?></td>

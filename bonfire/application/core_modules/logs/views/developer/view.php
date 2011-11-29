@@ -15,9 +15,9 @@
 
 	<div id="log">
 		<?php foreach ($log_content as $row) : ?>
-		<?php 
+		<?php
 			$class = '';
-			
+
 			if (strpos($row, 'ERROR') !== false)
 			{
 				$class="error";
@@ -25,7 +25,7 @@
 			if (strpos($row, 'DEBUG') !== false)
 			{
 				$class="attention";
-			}		
+			}
 		?>
 		<div style="border-bottom: 1px solid #999; padding: 5px 18px; color: #222;" <?php echo 'class="'. $class .'"' ?>>
 			<?php echo $row; ?>
@@ -35,11 +35,11 @@
 
 	<?php if (has_permission('Bonfire.Logs.Manage')) : ?>
 		<br/>
-	
+
 		<!-- Purge? -->
 		<div class="box delete rounded">
 			<?php echo sprintf(lang('log_delete1_note'),$log_file_pretty); ?>
-			
+
 			<a class="btn danger" href="<?php echo site_url(SITE_AREA .'/developer/logs/purge/'.$log_file); ?>" onclick="return confirm('Are you sure you want to delete this log file?')"><?php echo lang('log_delete1_button'); ?></a>
 		</div>
 	<?php endif; ?>

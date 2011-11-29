@@ -10,13 +10,13 @@
 	<?php endif; ?>
 
 	<h2><?php echo sprintf(lang('activity_view'),($vars['view_which'] == ucwords(lang('activity_date')) ? $vars['view_which'] . ' before' : $vars['view_which']),$vars['name']); ?></h2>
-	
+
 	<?php if (!isset($activity_content) || empty($activity_content)) : ?>
 	<div class="notification attention">
 		<p><?php echo lang('activity_not_found'); ?></p>
 	</div>
 	<?php else : ?>
-	
+
 	<div id="user_activities">
 		<table class="zebra-striped">
 			<thead>
@@ -27,9 +27,9 @@
 					<th><?php echo lang('activity_when'); ?></th>
 				</tr>
 			</thead>
-			
+
 			<tfoot></tfoot>
-			
+
 			<tbody>
 				<?php foreach ($activity_content as $activity) : ?>
 				<tr>
@@ -42,4 +42,4 @@
 			</tbody>
 		</table>
 	</div>
-	<?php endif; ?>	
+	<?php endif; ?>

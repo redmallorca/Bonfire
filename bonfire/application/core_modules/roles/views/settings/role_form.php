@@ -13,7 +13,7 @@
 			<span class="help-inline"><?php echo form_error('role_name'); ?></span>
 		</div>
 	</div>
-	
+
 	<div class="clearfix <?php echo form_has_error('description') ? 'error' : ''; ?>" style="vertical-align: top">
 		<label for="description"><?php echo lang('bf_description'); ?></label>
 		<div class="input">
@@ -21,7 +21,7 @@
 			<p class="help-inline"><?php echo form_error('description') ? form_error('description') : lang('role_max_desc_length'); ?></p>
 		</div>
 	</div>
-	
+
 	<div class="clearfix <?php echo form_has_error('login_destination') ? 'error' : ''; ?>">
 		<label for="login_destination"><?php echo lang('role_login_destination'); ?>?</label>
 		<div class="input">
@@ -29,7 +29,7 @@
 			<span class="help-inline"><?php echo form_error('login_destination') ? form_error('login_destination') : lang('role_destination_note'); ?></span>
 		</div>
 	</div>
-	
+
 	<div class="clearfix <?php echo form_has_error('default') ? 'error' : ''; ?>">
 		<label for="default"><?php echo lang('role_default_role'); ?>?</label>
 		<div class="input">
@@ -37,7 +37,7 @@
 			<span class="help-inline"><?php echo lang('role_default_note'); ?></span>
 		</div>
 	</div>
-	
+
 	<div class="clearfix">
 		<label for="can_delete"><?php echo lang('role_can_delete_role'); ?>?</label>
 		<div class="input">
@@ -52,21 +52,21 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- Permissions -->
 	<?php if (has_permission('Permissions.Settings.Manage')) : ?>
 	<fieldset>
 		<legend><?php echo lang('role_permissions'); ?></legend>
-	
+
 		<div class="input">
 			<p><?php echo lang('role_permissions_check_note'); ?></p>
-			
+
 			<?php echo modules::run('roles/settings/matrix'); ?>
 		</div>
-	
+
 	</fieldset>
 	<?php endif; ?>
-	
+
 	<div class="actions">
 		<input type="submit" name="submit" class="btn primary" value="<?php echo lang('role_save_role'); ?>" /> or <?php echo anchor(SITE_AREA .'/settings/roles', lang('bf_action_cancel')); ?>
 	</div>
@@ -76,9 +76,9 @@
 	<?php if (isset($role) && $role->can_delete && has_permission('Bonfire.Roles.Delete')) : ?>
 	<div class="box delete rounded">
 		<h3><?php echo lang('role_delete_role'); ?></h3>
-		
+
 		<p><?php echo lang('role_delete_note'); ?></p>
-		
+
 		<a class="btn danger" href="<?php echo site_url(SITE_AREA .'/settings/roles/delete/'. $role->role_id); ?>" onclick="return confirm('Are you sure you want to delete this role?')"><?php echo lang('role_delete_role'); ?></a>
 	</div>
 	<?php endif; ?>

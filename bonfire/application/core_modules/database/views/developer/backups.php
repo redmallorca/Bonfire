@@ -28,7 +28,7 @@
 					<td>
 						<?php echo $file ?>
 						<div class="hover-item small">
-							<a href="/admin/developer/database/get_backup/<?php echo $file ?>" title="Download this file"><?php echo lang('bf_action_download'); ?></a> | 
+							<a href="/admin/developer/database/get_backup/<?php echo $file ?>" title="Download this file"><?php echo lang('bf_action_download'); ?></a> |
 							<a href="/admin/developer/database/restore/<?php echo $file ?>" title="Restore this file"><?php echo lang('db_restore'); ?></a>
 						</div>
 					</td>
@@ -37,9 +37,9 @@
 			<?php endforeach; ?>
 			</tbody>
 		</table>
-		
+
 		</form>
-	
+
 	<?php else : ?>
 		<div class="notification attention">
 			<p><?php echo lang('db_no_backups'); ?></p>

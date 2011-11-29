@@ -20,7 +20,7 @@
 				<?php endforeach; ?>
 		</tr>
 	</thead>
-	
+
 	<tbody>
 	<?php foreach($matrix_permissions as $matrix_perm ) : ?>
 		<?php $matrix_perm = (array)$matrix_perm; ?>
@@ -29,13 +29,13 @@
 			<td><?php echo $matrix_perm['name']; ?></td>
 			<?php
 			for($i=0;$i<count($cols);$i++) :
-				if (has_permission('Permissions.'.$cols[$i]['role_name'].'.Manage')) : 
+				if (has_permission('Permissions.'.$cols[$i]['role_name'].'.Manage')) :
 					$checkbox_value = $cols[$i]['role_id'].','.$matrix_perm['permission_id'];
 					$checked = in_array($checkbox_value, $matrix_role_permissions) ? ' checked="checked"' : '';
 			 ?>
 				<td title="<?php echo $cols[$i]['role_name']; ?>"><input type="checkbox" value="<?php echo $checkbox_value; ?>"<?php echo $checked; ?> title="<?php echo lang('matrix_role');?>: <?php echo $cols[$i]['role_name']; ?>, <?php echo lang('matrix_permission');?>: <?php echo $matrix_perm['name']; ?>" /></td>
 				<?php endif; ?>
-			<?php endfor; ?>			
+			<?php endfor; ?>
 		</tr>
 		<?php endif; ?>
 	<?php endforeach; ?>

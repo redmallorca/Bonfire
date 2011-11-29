@@ -18,15 +18,15 @@
 		<tfoot>
 			<tr>
 				<td colspan="7">
-					<?php echo lang('bf_with_selected'); ?>: 
-					
+					<?php echo lang('bf_with_selected'); ?>:
+
 					<select name="action">
 						<option><?php echo lang('db_backup'); ?></option>
 						<option><?php echo lang('db_repair'); ?></option>
 						<option><?php echo lang('db_optimize'); ?></option>
 						<option>------</option>
 						<option><?php echo lang('db_drop'); ?></option>
-					</select> 
+					</select>
 					&nbsp;&nbsp;
 					<input type="submit" namve="submit" class="btn" value="Apply" />
 				</td>
@@ -53,5 +53,5 @@
 		<div class="notification info">
 			<p><?php echo lang('db_no_tables'); ?></p>
 		</div>
-		
+
 	<?php endif; ?>
