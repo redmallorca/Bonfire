@@ -224,7 +224,8 @@ class Admin_Controller extends Authenticated_Controller {
 
 		// Basic setup
 		Template::set_theme('admin');
-		Assets::add_css(array('ui.css', 'notifications.css', 'buttons.css'));
+		//Assets::add_css(array('ui.css', 'notifications.css', 'buttons.css'));
+		Assets::add_js('jquery-1.7.1.min.js');
 	}
 
 	//--------------------------------------------------------------------
