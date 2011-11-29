@@ -857,7 +857,7 @@ class Template {
 			if (!empty(self::$active_theme) && is_file(self::$site_path . $path .'/'. self::$active_theme . $view .'.php'))
 			{
 				if (self::$debug) { echo 'Found <b>'. $view .'</b> in Active Theme.<br/>'; }
-				$view_path = self::$site_path . $path .'/'. self::$active_theme .'/';
+				$view_path = self::$site_path . $path .'/'. self::$active_theme;
 			}
 			
 			/*
@@ -875,7 +875,9 @@ class Template {
 		// If the view was found, it's path is stored in the $view_path var. So parse or render it
 		// based on user settings.
 		if (!empty($view_path))
-		{
+		{	
+			$view_path = str_replace('//', '/', $view_path);
+		
 			// Set CI's view path to point to the right location.
 			//self::$ci->load->_ci_view_path = $view_path;
 			
@@ -887,7 +889,7 @@ class Template {
 				$output = self::$ci->parser->parse($view, $data, true);
 			} else 
 			{ 
-				$output = self::$ci->load->_ci_load(array('_ci_view' => $view_path . $view, '_ci_vars' => $data, '_ci_return' => true));
+				$output = self::$ci->load->_ci_load(array('_ci_path' => $view_path . $view .'.php', '_ci_vars' => $data, '_ci_return' => true));
 			}
 			
 			// Put CI's view path back to the original
