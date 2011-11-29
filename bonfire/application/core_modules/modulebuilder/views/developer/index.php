@@ -34,5 +34,10 @@
 		<?php endforeach; ?>
 		</tbody>
 	</table>
+<?php else: ?>
+	<div class="notification information">
+		<p><?php e(lang('mb_no_modules')); ?> <a href="<?php echo site_url(SITE_AREA .'/developer/modulebuilder/create') ?>"><?php e(lang('mb_create_link')); ?></a></p>
+	</div>
+
 <?php endif; ?>
 
