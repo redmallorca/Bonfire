@@ -90,6 +90,8 @@ class Install extends CI_Controller {
 	private $writeable_files = array(
 		'config/application.php'
 	);
+	
+	private $vdata = array();
 
 	//--------------------------------------------------------------------
 
@@ -115,7 +117,7 @@ class Install extends CI_Controller {
 	public function index() 
 	{ 
 		$this->load->library('form_validation');
-		$this->form_validation->CI =& $this;
+		//$this->form_validation->CI =& $this;
 		$this->form_validation->set_rules('environment', lang('in_environment'), 'required|trim|strip_tags|xss_clean');
 		$this->form_validation->set_rules('hostname', lang('in_host'), 'required|trim|strip_tags|xss_clean');
 		$this->form_validation->set_rules('username', lang('bf_username'), 'required|trim|strip_tags|xss_clean');
@@ -158,7 +160,7 @@ class Install extends CI_Controller {
 				
 				if (!$db)
 				{
-					Template::set_message('Unable to connect to database: '. mysql_error(), 'error');	
+					$$this->vdata['error'] = 'Unable to connect to database: '. mysql_error();	
 				}
 				else
 				{
@@ -178,21 +180,23 @@ class Install extends CI_Controller {
 			}
 			else
 			{
-				Template::set_message('There was an error saving the settings. Please verify that your database and '.$environment.'/database config files are writeable.', 'attention');	
+				$this->vdata['attention'] = 'There was an error saving the settings. Please verify that your database and '.$environment.'/database config files are writeable.';	
 			}
 		}
 	
-		Template::render();
+		$this->load->view('install/index', $this->vdata);
 	}
 	
 	//--------------------------------------------------------------------
 	
 	public function account() 
 	{
+		$view = 'install/account';
+	
 		if ($this->input->post('submit'))
 		{
 			$this->load->library('form_validation');
-			$this->form_validation->CI =& $this;
+			//$this->form_validation->CI =& $this;
 		
 			$this->form_validation->set_rules('site_title', 'Site Title', 'required|trim|strip_tags|min_length[1]|xss_clean');
 			$this->form_validation->set_rules('username', 'Username', 'required|trim|strip_tags|xss_clean');
@@ -204,21 +208,21 @@ class Install extends CI_Controller {
 			{
 				if ($this->setup())
 				{
-					Template::set_message('You are good to go! Happy coding!', 'success');
-//					redirect('/login');
-					Template::set_view('install/success');
+					$this->vdata['success'] = 'You are good to go! Happy coding!';
+
+					$view = 'install/success';
 				}
 				else 
 				{
-					Template::set_message('There was an error setting up your database: '. $this->errors, 'error');
+					$this->vdata['error']= 'There was an error setting up your database: '. $this->errors;
 				}
 			}
 		}
         
         // if $this->curl_error = 1, show warning on "account" page of setup
-        Template::set('curl_error', $this->curl_error);
+        $vdata['curl_error'] = $this->curl_error;
         
-		Template::render();
+		$this->load->view($view, $this->vdata);
 	}
 	
 	//--------------------------------------------------------------------
@@ -274,7 +278,7 @@ class Install extends CI_Controller {
 		// Make it available to the template lib if there are errors
 		if (!empty($errors))
 		{
-			Template::set('startup_errors', $errors);
+			$this->vdata['startup_errors'] = $errors;
 		}
 		
 		unset($errors, $folder_errors, $file_errors);

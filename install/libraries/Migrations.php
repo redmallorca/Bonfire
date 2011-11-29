@@ -299,7 +299,7 @@ class Migrations {
 			if (preg_match('/^\d{3}_(\w+)$/', $name, $match))
 			{
 				$match[1] = strtolower($match[1]);
-				
+
 				// Cannot repeat a migration at different steps
 				if (in_array($match[1], $migrations))
 				{
@@ -364,7 +364,7 @@ class Migrations {
 			$class = 'Migration_'.ucfirst($m);
 			
 			$c = new $class;
-			
+	
 			if ($c->migration_type == 'forge')
 			{ 
 				call_user_func(array($c, $method));
