@@ -107,14 +107,7 @@ class CI_Cache_file extends CI_Driver {
 	 */
 	public function delete($id)
 	{
-		if (file_exists($this->_cache_path.$id))
-		{
-			return unlink($this->_cache_path.$id);
-		}
-		else
-		{
-			return FALSE;
-		}
+		return unlink($this->_cache_path.$id);
 	}
 
 	// ------------------------------------------------------------------------
@@ -164,16 +157,17 @@ class CI_Cache_file extends CI_Driver {
 		
 		if (is_array($data))
 		{
+			$data = $data['data'];
 			$mtime = filemtime($this->_cache_path.$id);
 
-			if ( ! isset($data['data']['ttl']))
+			if ( ! isset($data['ttl']))
 			{
 				return FALSE;
 			}
 
 			return array(
-				'expire' => $mtime + $data['data']['ttl'],
-				'mtime'	 => $mtime
+				'expire' 	=> $mtime + $data['ttl'],
+				'mtime'		=> $mtime
 			);
 		}
 		

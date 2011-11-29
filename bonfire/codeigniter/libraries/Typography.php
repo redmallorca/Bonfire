@@ -22,7 +22,7 @@
  * @access		private
  * @category	Helpers
  * @author		ExpressionEngine Dev Team
- * @link		http://codeigniter.com/user_guide/libraries/typography.html
+ * @link		http://codeigniter.com/user_guide/helpers/
  */
 class CI_Typography {
 
