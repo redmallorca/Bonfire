@@ -6,7 +6,7 @@
 	</footer>
 
 	<div id="debug"><!-- Stores the Profiler Results --></div>
-	
+	<script src="<?php echo base_url('assets/js/jquery-1.7.1.min.js') ?>"></script>
 	<?php echo Assets::js(); ?>
 </body>
 </html>
