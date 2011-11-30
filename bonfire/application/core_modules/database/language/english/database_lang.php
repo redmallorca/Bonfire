@@ -89,3 +89,8 @@ $lang['db_successful_save']		= 'Your settings were successfully saved.';
 $lang['db_erroneous_save']		= 'There was an error saving the settings.';
 $lang['db_successful_save_act']	= 'Database settings were successfully saved';
 $lang['db_erroneous_save_act']	= 'Database settings did not save correctly';
+
+$lang['db_sql_query']			= 'SQL Query';
+$lang['db_total_results']		= 'Total Results';
+$lang['db_no_rows']				= 'No data found for table.';
+$lang['db_browse']				= 'Browse';

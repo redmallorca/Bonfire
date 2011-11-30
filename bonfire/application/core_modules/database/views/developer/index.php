@@ -38,7 +38,11 @@
 				<td class="column-check">
 					<input type="checkbox" value="<?php echo $table->Name ?>" name="checked[]" />
 				</td>
-				<td><?php echo $table->Name ?></td>
+				<td>
+					<a href="<?php echo site_url(SITE_AREA .'/developer/database/browse/'. $table->Name) ?>">
+						<?php echo $table->Name ?>
+					</a>
+				</td>
 				<td style="text-align: center"><?php echo $table->Rows?></td>
 				<td><?php echo byte_format($table->Data_length) ?></td>
 				<td><?php echo byte_format($table->Index_length) ?></td>

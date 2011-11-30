@@ -112,6 +112,13 @@ body > .main {
 .container-fluid > .content {
   margin-left: 240px;
 }
+
+.hscroll {
+	width: 100%;
+	padding: 0;
+	overflow-x: scroll;
+}
+
 a {
   color: #0069d6;
   text-decoration: none;
@@ -632,7 +639,9 @@ table th {
   padding-top: 9px;
   font-weight: bold;
   vertical-align: middle;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #333;
+  background: #777;
+  color: #fff;
 }
 table td {
   vertical-align: top;

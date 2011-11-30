@@ -93,6 +93,29 @@ class Developer extends Admin_Controller {
 
 	//---------------------------------------------------------------
 
+	public function browse($table = '') 
+	{
+		if (empty($table))
+		{
+			Template::set_message('No table name was provided.', 'error');
+			redirect(SITE_AREA .'/developer/database');
+		}
+		
+		$query = $this->db->get($table);
+		
+		if ($query->num_rows())
+		{
+			Template::set('rows', $query->result());
+		}
+		
+		Template::set('query', $this->db->last_query());
+		
+		Template::set('toolbar_title', lang('db_browse') .': '. $table);
+		Template::render();
+	}
+	
+	//--------------------------------------------------------------------
+	
 	public function backups()
 	{
 		// Get a list of existing backup files
