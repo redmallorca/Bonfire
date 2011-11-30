@@ -160,7 +160,7 @@ class Install extends CI_Controller {
 				
 				if (!$db)
 				{
-					$$this->vdata['error'] = 'Unable to connect to database: '. mysql_error();	
+					$this->vdata['error'] = 'Unable to connect to database: '. mysql_error();	
 				}
 				else
 				{

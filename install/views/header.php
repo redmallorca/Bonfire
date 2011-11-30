@@ -10,30 +10,30 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('views/screen.css'); ?>" />
 </head>
 <body>
-
-	<div class="page">
 	
 		<!-- Header -->
 		<div class="head text-right">
-			<h1>Bonfire</h1>
+			<div class="inner">
+				<h1><img src="<?php echo site_url('views/images/bonfire_logo.png') ?>" /></h1>
+			</div>
 		</div>
 
 		<div class="main">
 		
 			<?php if (isset($error)) :?>
-			<div class="notificatin error">
+			<div class="notification error">
 				<p><?php echo $error; ?></p>
 			</div>
 			<?php endif; ?>
 			
 			<?php if (isset($attention)) :?>
-			<div class="notificatin attention">
+			<div class="notification attention">
 				<p><?php echo $attention; ?></p>
 			</div>
 			<?php endif; ?>
 			
 			<?php if (isset($success)) :?>
-			<div class="notificatin success">
+			<div class="notification success">
 				<p><?php echo $success; ?></p>
 			</div>
 			<?php endif; ?>
