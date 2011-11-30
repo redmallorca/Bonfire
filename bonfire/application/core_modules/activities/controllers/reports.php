@@ -235,6 +235,8 @@ class Reports extends Admin_Controller {
 	*/
 	public function _get_activity($which='activity_user',$find_value=FALSE)
 	{
+		Template::set('filter', $this->input->post('activity_select'));
+	
 		// set a couple default variables
 		$options = array(0 => 'All');
 		$name = 'All';
@@ -304,6 +306,13 @@ class Reports extends Admin_Controller {
 		{
 			$where = ($where == 'activity_id') ? 'activity_id <' : $where;
 			$this->db->where($where,$find_value);
+			
+			$this->db->where('activities.deleted', 0);
+			$total = $this->activity_model->count_by($where, $find_value);
+		}
+		else
+		{
+			$total = $this->activity_model->count_by('activities.deleted', 0);
 		}
 
 		// does user have permission to see own records?
@@ -315,11 +324,23 @@ class Reports extends Admin_Controller {
 		// don't show the deleted records
 		$this->db->where('activities.deleted', 0);
 
+		// Pagination
+		$offset = $this->input->get('per_page');
+		
+		$limit = $this->settings_lib->item('site.list_limit');
+		
+		$this->pager['base_url'] 			= current_url() .'?';
+		$this->pager['total_rows'] 			= $total;
+		$this->pager['per_page'] 			= $limit;
+		$this->pager['page_query_string']	= true;
+
+		$this->pagination->initialize($this->pager);
+
 		// get the activities
 		$this->db->join('users', 'activities.user_id = users.id', 'left');
 		$this->db->order_by('activity_id','desc'); // most recent stuff on top
 		$this->db->select('activity, module, activities.created_on AS created, username');
-		Template::set('activity_content', $this->activity_model->find_all());
+		Template::set('activity_content', $this->activity_model->limit($limit, $offset)->find_all());
 
 		Template::set('select_options', $options);
 
