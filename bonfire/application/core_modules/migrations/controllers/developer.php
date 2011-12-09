@@ -56,7 +56,7 @@ class Developer extends Admin_Controller {
 		Template::set('installed_version', $this->migrations->get_schema_version('app_'));
 		Template::set('latest_version', $this->migrations->get_latest_version('app_'));
 
-		Template::set('core_installed_version', $this->migrations->get_schema_version());
+		Template::set('core_installed_version', $this->migrations->get_schema_version('core'));
 		Template::set('core_latest_version', $this->migrations->get_latest_version());
 
 		Template::set('core_migrations', $this->migrations->get_available_versions());

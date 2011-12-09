@@ -436,7 +436,7 @@ class Migrations {
 			// new schema table layout
 			$type = empty($type) ? 'core' : $type;
 			$row = $this->_ci->db->get_where('schema_version', array('type' => $type))->row();
-			return isset($row->version_num) ? $row->version_num: 0;
+			return isset($row->version) ? $row->version: 0;
 		}
 		else
 		{
