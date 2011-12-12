@@ -186,7 +186,7 @@ class Developer extends Admin_Controller {
 	        }
 	        // drop the Migration record - new Migration schema method
 	        $module_name_lower = strtolower($module_name);
-	        if ($this->db->field_exists('version_num', 'schema_version'))
+	        if ($this->db->field_exists('version', 'schema_version'))
 	        {
 	        	$this->db->delete('schema_version', array('type' => $module_name_lower.'_'));
 	        }
@@ -339,7 +339,7 @@ class Developer extends Admin_Controller {
 		$data = $data + $file_data;
 		
 		// Allow for the Old method - update the schema first to prevent errors in duplicate column names due to Migrations.php caching db columns
-		if (!$this->db->field_exists('version_num', 'schema_version'))
+		if (!$this->db->field_exists('version', 'schema_version'))
 		{
 			$this->load->dbforge();
 			$this->dbforge->add_column('schema_version', array(
