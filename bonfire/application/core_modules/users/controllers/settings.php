@@ -187,6 +187,7 @@ class Settings extends Admin_Controller {
 
 		$this->load->config('address');
 		$this->load->helper('address');
+		$this->load->helper('form');
 
 		$user_id = $this->uri->segment(5);
 		if (empty($user_id))
